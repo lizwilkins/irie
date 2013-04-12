@@ -1,0 +1,20 @@
+<% if @route.errors.any? %>
+  <h4>One or more errors must be corrected first:</h4>
+  <ul>
+  <% @route.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for route do |f| %>
+  <%= f.label :number %>
+  <%= f.text_field :number %>
+  <%= f.label :origin %>
+  <%= f.text_field :origin %>
+  <%= f.label :destination %>
+  <%= f.text_field :destination %>
+  <%= f.label :path %>
+  <%= f.text_field :path %>
+  <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+<% end %>
