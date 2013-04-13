@@ -5,10 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-users = [
-        {:username => 'ann', :email => 'ann@ann.com', :password => 'ann', :password_confirmation => 'ann'},
-        {:username => 'bob', :email => 'bob@bob.com', :password => 'bob', :password_confirmation => 'bob'}]
-riders = [
+(1..20).map do |user, i| 
+  User.create(:user => 
+  {:username => "user#{i}", :email => "user#{i}@gmail.com", :password => 'ann', :password_confirmation => 'ann'})
+end
+
+(1..20).map riders = [
         {:user_id => 1, :balance => '100.00'},
         {:user_id => 2, :balance => '100.00'}]
 passengers = [
