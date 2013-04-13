@@ -1,0 +1,20 @@
+<% provide :title, "Users" %>
+
+<table class="table">
+  <tr>
+    <td><b>Supervisor</b></td>
+    <td><b>First Name</b></td>
+    <td><b>Last Name</b></td>
+    <td><b>Phone</b></td>
+    <%= link_to "Trip Assignment", trip_path(), :class => 'btn btn-primary' %> or 
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= driver.supervisor %></td>
+      <td><%=  %></td>
+      <td><%=  %></td>
+      <td><%=  %></td>
+    </tr>
+  <% end %>
+</table>
+

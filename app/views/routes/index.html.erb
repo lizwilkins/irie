@@ -1,27 +1,22 @@
-<h1>Routes</h1>
+<% provide :title, "Routes" %>
 
 <table class="table">
-
   <tr>
-    <th>Number</th>
-    <th>Origin</th>
-    <th>Destination</th>
-    <th>Path</th>
-    <th></th>
-    <th></th>
+    <td><b>Route Number</b></td>
+    <td><b>Origin</b></td>
+    <td><b>Destination</b></td>
+    <td><b>Path</b></td>    
   </tr>
-
   <% @routes.each do |route| %>
     <tr>
-      <td><%= route.number %></td>
+      <td><%= route.username %></td>
       <td><%= route.origin %></td>
       <td><%= route.destination %></td>
-      <td><%= route.path %></td>
+      <td><%= route.departure %></td>      
       <td><%= link_to 'Edit', edit_route_path(route) %></td>
       <td><%= link_to 'Delete', route, :method => :delete, :confirm => "Are you sure you want to delete route #{route.number}?" %></td>
     </tr>
   <% end %>
-
 </table>
 
 <%= link_to 'Create route', new_route_path, :class => 'btn btn-primary' %>

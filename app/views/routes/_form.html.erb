@@ -1,20 +1,31 @@
 <% if @route.errors.any? %>
-  <h4>One or more errors must be corrected first:</h4>
-  <ul>
-  <% @route.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-  </ul>
+  <div class="error_messages">
+    <h2>Form is invalid.  One or more errors must be corrected:</h2>
+    <ul>
+      <% @route.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
+  
+<%= form_for @route do |f| %>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :origin %><br />
+    <%= f.text_field :origin %>
+  </div>
+  <div class="field">
+    <%= f.label :destination %><br />
+    <%= f.text_field :destination %>
+  </div>
+  <div class="field">
+    <%= f.label :path %><br />
+    <%= f.text_field :path %>
+  </div>
 
-<%= form_for route do |f| %>
-  <%= f.label :number %>
-  <%= f.text_field :number %>
-  <%= f.label :origin %>
-  <%= f.text_field :origin %>
-  <%= f.label :destination %>
-  <%= f.text_field :destination %>
-  <%= f.label :path %>
-  <%= f.text_field :path %>
-  <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+  <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>
