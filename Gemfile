@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'easy_roles'
 gem 'bootstrap-sass'
+
 gem 'rb-fsevent'
 
 group :assets do
@@ -20,6 +21,8 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'pry'
+  gem 'pry-debugger'
 end
 
 group :test do

@@ -1,14 +1,13 @@
-
-  <% if @route.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @route.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @route.errors.any? %>
+  <div class="error_messages">
+    <h2>Form is invalid.  One or more errors must be corrected:</h2>
+    <ul>
+      <% @route.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   
 <%= form_for @route do |f| %>
   <div class="field">
@@ -24,11 +23,9 @@
     <%= f.text_field :destination %>
   </div>
   <div class="field">
-    <%= f.label :departure %><br />
-    <%= f.text_field :departure %>
+    <%= f.label :path %><br />
+    <%= f.text_field :path %>
   </div>
 
-  <div class="actions"><%= f.submit "Sign Up" %></div>
+  <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>
-
-

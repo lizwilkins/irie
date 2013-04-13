@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
       redirect_to root_path, notice: "Logged in!"
     else
       redirect_to new_session_path, alert: "Username or password is invalid."
-      #flash.now.alert = "Email or password is invalid."
     end
   end
 

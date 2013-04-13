@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412174500) do
+ActiveRecord::Schema.define(:version => 20130412181952) do
 
   create_table "drivers", :force => true do |t|
     t.string   "supervisor"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20130412174500) do
   end
 
   create_table "routes", :force => true do |t|
-    t.string   "designation"
+    t.string   "number"
     t.string   "origin"
     t.string   "destination"
     t.string   "path"
