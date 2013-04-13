@@ -1,0 +1,19 @@
+
+  <% if @driver.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @driver.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<%= form_for @driver do |f| %>
+  <div class="field">
+    <%= f.label :supervisor %><br />
+    <%= f.text_field :supervisor %>
+  </div>
+  <div class="actions"><%= f.submit "Sign Up" %></div>
+<% end %>
