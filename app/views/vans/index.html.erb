@@ -1,14 +1,14 @@
-<% provide :title, "Users" %>
+<% provide :title, "Vans" %>
 
 <table class="table">
   <tr>
-    <td><b>UserName</b></td>
-    <td><b>Email</b></td>
+    <td><b>Designation</b></td>
+    <td><b>Capacity</b></td>
   </tr>
-  <% @users.each do |user| %>
+  <% @vans.each do |van| %>
     <tr>
-      <td><%= user.username %></td>
-      <td><%= user.email %></td>
+      <td><%= van.designation %></td>
+      <td><%= van.capacity %></td>
     </tr>
   <% end %>
 </table>
