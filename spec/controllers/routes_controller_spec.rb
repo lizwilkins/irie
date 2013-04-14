@@ -9,7 +9,6 @@ describe RoutesController do
     it {should route(:put, '/routes/1').to :action => :update, :id => 1}
     it {should route(:delete, '/routes/1').to :action => :destroy, :id => 1}
     it {should route(:get, '/routes').to :action => :index}
-<<<<<<< HEAD
   end
 
   context 'GET new' do
@@ -96,8 +95,7 @@ describe RoutesController do
       it {should redirect_to routes_path}
       it {should set_the_flash[:notice]}
     end
-=======
->>>>>>> 2ff74cd34f00fd6826d8d9ea56683ba6717bdfc7
+
   end
 
   context 'GET new' do

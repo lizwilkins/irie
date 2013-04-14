@@ -5,7 +5,6 @@ describe Route do
     it {should validate_presence_of :number}
     it {should validate_presence_of :origin}
     it {should validate_presence_of :destination}
-    it {should validate_presence_of :path}
 
     it {should validate_uniqueness_of :number}
   end

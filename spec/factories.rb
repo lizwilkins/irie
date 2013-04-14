@@ -15,7 +15,6 @@ FactoryGirl.define do
     first_name 'Bob'
     last_name 'Hoskins'
   end
-<<<<<<< HEAD
 
   factory :passenger do
     sequence(:trip_id) {|n| n}
@@ -28,6 +27,3 @@ FactoryGirl.define do
   end    
 
 end
-=======
-end
->>>>>>> 2ff74cd34f00fd6826d8d9ea56683ba6717bdfc7

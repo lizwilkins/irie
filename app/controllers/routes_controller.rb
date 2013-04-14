@@ -37,8 +37,4 @@ class RoutesController < ApplicationController
     flash[:notice] = "Route #{@route.number} deleted!"
     redirect_to routes_path
   end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> 2ff74cd34f00fd6826d8d9ea56683ba6717bdfc7

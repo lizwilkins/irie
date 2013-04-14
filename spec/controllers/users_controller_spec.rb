@@ -52,7 +52,7 @@ describe UsersController do
       let(:invalid_parameters) {{:user => invalid_attributes}}
  
       before {post :create, invalid_parameters}
-      it {should set_the_flash[:alert].to("There were errors in trying to create your account.").now}
+      it {should set_the_flash[:alert].to("There were errors creating your account.").now}
       it {should render_template :new}
     end
   end
@@ -94,7 +94,7 @@ describe UsersController do
         before {put :update, invalid_parameters, 'user_id' => user.id}
 
         it {should render_template :edit}
-        it {should set_the_flash[:alert].to("There were errors in trying to update your account.").now}
+        it {should set_the_flash[:alert].to("There were errors updating your account.").now}
       end
     end
 

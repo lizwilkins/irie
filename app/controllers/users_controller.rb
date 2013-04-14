@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Your account was successsfully created."
     else
-      flash.now[:alert] = "There were errors in creating your account."
+      flash.now[:alert] = "There were errors creating your account."
       render :new
     end
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Your account was successsfully updated."
       redirect_to users_path
     else
-      flash.now[:alert] = "There were errors in updating your account."
+      flash.now[:alert] = "There were errors updating your account."
       render :edit
     end
   end
