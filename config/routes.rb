@@ -1,8 +1,8 @@
 Irie::Application.routes.draw do
 
+  resources :routes, :except => [:show]   # why ho "show" path???
   resources :users, :except => :show
   resources :sessions 
-  resources :routes
   resources :trips
   resources :passengers
   resources :vans
@@ -13,15 +13,15 @@ Irie::Application.routes.draw do
   get 'login', to: "sessions#new", as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  # devise_for :rocketeers, :controllers => { :sessions => "sessions" }
+  root :to => "home#index" #root can be anything, but must be present for devise gem.  
+
+ # devise_for :rocketeers, :controllers => { :sessions => "sessions" }
 
   # devise_for :rocketeers, :controllers => { :registrations => "registrations" }
 
   # resources :rocketeers, :only => [:index, :show]
 
   # match 'home' => 'rocketeers#show'
-
-  root :to => "users#index" #root can be anything, but must be present for devise gem.  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

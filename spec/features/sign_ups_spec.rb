@@ -11,7 +11,8 @@ feature 'Sign up' do
     fill_in "user_first_name", :with => user.first_name
     fill_in "user_last_name", :with => user.last_name
     fill_in "user_phone", :with => user.phone
-    click_button "Sign Up"
+
+    click_button "Submit"
     page.should have_content 'Your account was successsfully created.'
   end
 end
@@ -28,7 +29,7 @@ feature 'invalid sign up' do
     fill_in "user_first_name", :with => user.first_name
     fill_in "user_last_name", :with => user.last_name
     fill_in "user_phone", :with => user.phone
-    click_button "Sign Up"
+    click_button "Submit"
     page.should have_content "Form is invalid"
   end
 end

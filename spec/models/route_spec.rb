@@ -11,6 +11,9 @@ describe Route do
   end
 
   context 'accessibility' do 
+  end
+
+  context 'mass assignment' do
     it {should allow_mass_assignment_of :number}
     it {should allow_mass_assignment_of :origin}
     it {should allow_mass_assignment_of :destination}

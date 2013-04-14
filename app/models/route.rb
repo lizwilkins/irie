@@ -1,8 +1,9 @@
 class Route < ActiveRecord::Base
 
-  validates :number, :origin, :destination, :path, :presence => true
+  validates :number, :presence => :true, :uniqueness => :true
+  validates :origin, :presence => :true
+  validates :destination, :presence => :true
   attr_accessible :number, :origin, :destination, :path
-  validates_uniqueness_of :number
 
   has_many :trips
 
