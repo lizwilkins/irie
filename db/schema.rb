@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130412234032) do
 
   create_table "buses", :force => true do |t|
@@ -20,6 +21,9 @@ ActiveRecord::Schema.define(:version => 20130412234032) do
     t.datetime "updated_at",     :null => false
     t.string   "description"
   end
+=======
+ActiveRecord::Schema.define(:version => 20130412174500) do
+>>>>>>> master
 
   create_table "drivers", :force => true do |t|
     t.string   "supervisor"
@@ -43,7 +47,11 @@ ActiveRecord::Schema.define(:version => 20130412234032) do
   end
 
   create_table "routes", :force => true do |t|
+<<<<<<< HEAD
     t.string   "number"
+=======
+    t.string   "designation"
+>>>>>>> master
     t.string   "origin"
     t.string   "destination"
     t.string   "path"
@@ -52,7 +60,11 @@ ActiveRecord::Schema.define(:version => 20130412234032) do
   end
 
   create_table "trips", :force => true do |t|
+<<<<<<< HEAD
     t.integer  "bus_id"
+=======
+    t.integer  "van_id"
+>>>>>>> master
     t.integer  "driver_id"
     t.integer  "route_id"
     t.datetime "departure"
@@ -72,4 +84,14 @@ ActiveRecord::Schema.define(:version => 20130412234032) do
     t.datetime "updated_at",                            :null => false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "vans", :force => true do |t|
+    t.string   "designation"
+    t.integer  "capacity"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+>>>>>>> master
 end

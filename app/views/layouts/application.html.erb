@@ -1,19 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Irie</title>
+  <title>"Irie, Drivah!"</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
-
   <div class="container">
     <%= render :partial => 'layouts/flash', :locals => {:flash => flash} %>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <%= link_to "Users", users_path, :class => 'btn btn-primary' %>
+        <%= link_to "Riders", riders_path, :class => 'btn btn-primary' %>
+        <%= link_to "Drivers", drivers_path, :class => 'btn btn-primary' %>
+        <%= link_to "Vans", vans_path, :class => 'btn btn-primary' %>
+        <%= link_to "Routes", routes_path, :class => 'btn btn-primary' %>
+        <%= link_to "Trips", trips_path, :class => 'btn btn-primary' %>
+        <%= link_to "Passengers", passengers_path, :class => 'btn btn-primary' %>
+      </div>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-info"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-error"><%= flash[:alert] %></div>
+    <% end %>
+    <div style="text-align:right;padding:10px">
+      <% if current_user %>
+        Logged in as <b><%= current_user.username %></b>.
+        <%= link_to "Log Out", logout_path, method: "delete", :class => 'btn btn-primary' %>
+        <%= link_to "Edit Account", edit_user_path(current_user), method: "get", :class => 'btn btn-primary' %>
+      <% else %>
+        <%= link_to "Sign Up", signup_path, :class => 'btn btn-primary' %> or
+        <%= link_to "Log In", login_path, :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+
+    <h4><%= link_to 'Irie', root_path%></h4>
+    <h5>St. Lucia Transit Tool</h5>
+    <br><br>
+    <h3><%= yield :title %></h3>
+
     <%= yield %>
-
   </div>
-
+  
 </body>
 </html>

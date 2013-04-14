@@ -1,0 +1,24 @@
+
+  <% if @passenger.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @passenger.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for @passenger do |f| %>
+  <div class="field">
+    <%= f.label :trip_id %><br />
+    <%= f.text_field :trip_id %>
+  </div>
+  <div class="field">
+    <%= f.label :passenger_id %><br />
+    <%= f.text_field :passenger_id %>
+  </div>
+
+  <div class="actions"><%= f.submit "Sign Up" %></div>
+<% end %>

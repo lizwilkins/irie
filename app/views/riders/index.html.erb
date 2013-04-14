@@ -1,0 +1,15 @@
+<% provide :title, "Riders" %>
+
+<table class="table">
+  <tr>
+    <td><b>Balance</b></td>
+    <td><b>User ID</b></td>
+  </tr>
+  <% @riders.each do |rider| %>
+    <tr>
+      <td><%= rider.balance %></td>
+      <td><%= rider.user_id %></td>
+    </tr>
+  <% end %>
+</table>
+
