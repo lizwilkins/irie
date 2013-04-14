@@ -9,4 +9,14 @@ FactoryGirl.define do
     last_name 'Hoskins'
   end
 
+  factory :passenger do
+    sequence(:trip_id) {|n| n}
+    sequence(:rider_id) {|n| n}
+  end  
+
+  factory :rider do
+    sequence(:user_id) {|n| n}
+    balance 100.00
+  end    
+
 end

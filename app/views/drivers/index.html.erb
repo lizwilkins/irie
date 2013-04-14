@@ -1,4 +1,4 @@
-<% provide :title, "Users" %>
+<% provide :title, "Drivers" %>
 
 <table class="table">
   <tr>
@@ -6,9 +6,9 @@
     <td><b>First Name</b></td>
     <td><b>Last Name</b></td>
     <td><b>Phone</b></td>
-    <%= link_to "Trip Assignment", trip_path(), :class => 'btn btn-primary' %> or 
+    <%= link_to "Trip Assignment" %> or 
   </tr>
-  <% @users.each do |user| %>
+  <% @drivers.each do |driver| %>
     <tr>
       <td><%= driver.supervisor %></td>
       <td><%=  %></td>

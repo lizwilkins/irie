@@ -1,44 +1,42 @@
 class DriversController < ApplicationController
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @driver = Driver.new
+  end
   
-  # def create
-  #   @user = User.new(params[:user])
-  #   if @user.save
-  #     session[:user_id] = @user.id
-  #     redirect_to root_url, notice: "Thank you for signing up!"
-  #   else
-  #     flash.now[:alert] = "There were errors"
-  #     render "new"
-  #   end
-  # end
+  def create
+    @driver = driver.new(params[:driver])
+    if @driver.save
+      redirect_to drivers_path, notice: "The driver was successfully created."
+    else
+      flash.now[:alert] = "TThere were errors creating this driver."
+      render :new
+    end
+  end
 
-  # def index
-  #   @users = User.all
-  #     render "index"
-  #   end
+  def index
+    @drivers = Driver.all
+      render :index
+    end
 
-  # def edit
-  #   @user = User.find(params[:id])
-  # end
+  def edit
+    @driver = Driver.find(params[:id])
+  end
 
-  # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(params[:user])
-  #     flash[:notice] = "Your account was successsfully updated."
-  #     redirect_to users_path
-  #   else
-  #     flash.now[:alert] = "There were errors in trying to update your account!"
-  #     render :edit
-  #   end
-  # end
+  def update
+    @driver = Driver.find(params[:id])
+    if @driver.update_attributes(params[:driver])
+      flash[:notice] = "The driver was successsfully updated."
+      redirect_to drivers_path
+    else
+      flash.now[:alert] = "There were errors updating this driver."
+      render :edit
+    end
+  end
 
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #   session[:user_id] = nil
-  #   flash[:notice] = "Your profile has been obliterated!"
-  #   redirect_to signup_path
-  # end
+  def destroy
+    @driver = Driver.find(params[:id])
+    @driver.destroy
+    flash[:notice] = "The driver was successfully deleted."
+    redirect_to drivers_path
+  end
 end

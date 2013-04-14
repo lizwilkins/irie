@@ -12,7 +12,7 @@ feature 'Sign up' do
     fill_in "user_last_name", :with => user.last_name
     fill_in "user_phone", :with => user.phone
     click_button "Sign Up"
-    page.should have_content 'Thank you for signing up!'
+    page.should have_content 'Your account was successsfully created.'
   end
 end
 
@@ -55,6 +55,6 @@ feature 'Log Out' do
     fill_in "password", :with => user.password
     click_button "Submit"
     click_link "Log Out" 
-    page.should have_content "Logged out!"   
+    page.should have_content "Logged out."   
   end
 end

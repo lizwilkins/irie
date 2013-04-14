@@ -22,10 +22,10 @@ describe User do
     it {should allow_mass_assignment_of :phone}   
   end
 
-  # context 'associations' do
-  #   it {should have_one :rider}
-  #   it {should have_one :driver}
-  # end
+  context 'associations' do
+    it {should have_one :rider}
+    it {should have_one :driver}
+  end
 
   # context '#set_role' do
   #   it 'returns the username of the user' do

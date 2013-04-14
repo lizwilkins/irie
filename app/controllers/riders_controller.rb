@@ -1,44 +1,42 @@
 class RidersController < ApplicationController
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @rider = Rider.new
+  end
   
-  # def create
-  #   @user = User.new(params[:user])
-  #   if @user.save
-  #     session[:user_id] = @user.id
-  #     redirect_to root_url, notice: "Thank you for signing up!"
-  #   else
-  #     flash.now[:alert] = "There were errors"
-  #     render "new"
-  #   end
-  # end
+  def create
+    @rider = Rider.new(params[:rider])
+    if @rider.save
+      redirect_to rider_path(@rider), notice: "Your profile was successfully created."
+    else
+      flash.now[:alert] = "There were errors creating your profile."
+      render :new
+    end
+  end
 
-  # def index
-  #   @users = User.all
-  #     render "index"
-  #   end
+  def index
+    @riders = Rider.all
+      render :index
+    end
 
-  # def edit
-  #   @user = User.find(params[:id])
-  # end
+  def edit
+    @rider = Rider.find(params[:id])
+  end
 
-  # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(params[:user])
-  #     flash[:notice] = "Your account was successsfully updated."
-  #     redirect_to users_path
-  #   else
-  #     flash.now[:alert] = "There were errors in trying to update your account!"
-  #     render :edit
-  #   end
-  # end
+  def update
+    @rider = Rider.find(params[:id])
+    if @rider.update_attributes(params[:rider])
+      flash[:notice] = "Your profile was successsfully updated."
+      redirect_to rider_path(@rider)
+    else
+      flash.now[:alert] = "There were errors updating your profile."
+      render :edit
+    end
+  end
 
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #   session[:user_id] = nil
-  #   flash[:notice] = "Your profile has been obliterated!"
-  #   redirect_to signup_path
-  # end
+  def destroy
+    @rider = Rider.find(params[:id])
+    @rider.destroy
+    flash[:notice] = "Your profile was successfully deleted."
+    redirect_to root_path
+  end
 end

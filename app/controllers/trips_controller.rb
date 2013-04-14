@@ -1,44 +1,43 @@
 class TripsController < ApplicationController
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @trip = Trip.new
+  end
   
   # def create
-  #   @user = User.new(params[:user])
-  #   if @user.save
-  #     session[:user_id] = @user.id
-  #     redirect_to root_url, notice: "Thank you for signing up!"
+  #   @trip = trip.new(params[:trip])
+  #   if @trip.save
+  #     session[:trip_id] = @trip.id
+  #     redirect_to root_url, notice: "The trip was successfully created."
   #   else
-  #     flash.now[:alert] = "There were errors"
-  #     render "new"
+  #     flash.now[:alert] = "There were errors creating your trip."
+  #     render :new
   #   end
   # end
 
-  # def index
-  #   @users = User.all
-  #     render "index"
-  #   end
+  def index
+    @trips = Trip.all
+      render :index
+    end
 
   # def edit
-  #   @user = User.find(params[:id])
+  #   @trip = Trip.find(params[:id])
   # end
 
   # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(params[:user])
-  #     flash[:notice] = "Your account was successsfully updated."
-  #     redirect_to users_path
+  #   @trip = Trip.find(params[:id])
+  #   if @trip.update_attributes(params[:trip])
+  #     flash[:notice] = "YThe trip was successfully updated."
+  #     redirect_to trips_path
   #   else
-  #     flash.now[:alert] = "There were errors in trying to update your account!"
+  #     flash.now[:alert] = "There were errors updating your trip."
   #     render :edit
   #   end
   # end
 
   # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #   session[:user_id] = nil
-  #   flash[:notice] = "Your profile has been obliterated!"
+  #   @trip = Trip.find(params[:id])
+  #   @trip.destroy
+  #   flash[:notice] = "The trip was successfully deleted."
   #   redirect_to signup_path
   # end
 end

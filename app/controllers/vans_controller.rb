@@ -1,33 +1,33 @@
 class VansController < ApplicationController
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @van = Van.new
+  end
   
   # def create
-  #   @user = User.new(params[:user])
-  #   if @user.save
-  #     session[:user_id] = @user.id
+  #   @van = van.new(params[:van])
+  #   if @van.save
+  #     session[:van_id] = @van.id
   #     redirect_to root_url, notice: "Thank you for signing up!"
   #   else
   #     flash.now[:alert] = "There were errors"
-  #     render "new"
+  #     render :new
   #   end
   # end
 
-  # def index
-  #   @users = User.all
-  #     render "index"
-  #   end
+  def index
+    @vans = Van.all
+    render :index
+  end
 
   # def edit
-  #   @user = User.find(params[:id])
+  #   @van = van.find(params[:id])
   # end
 
   # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(params[:user])
+  #   @van = van.find(params[:id])
+  #   if @van.update_attributes(params[:van])
   #     flash[:notice] = "Your account was successsfully updated."
-  #     redirect_to users_path
+  #     redirect_to vans_path
   #   else
   #     flash.now[:alert] = "There were errors in trying to update your account!"
   #     render :edit
@@ -35,9 +35,8 @@ class VansController < ApplicationController
   # end
 
   # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #   session[:user_id] = nil
+  #   @van = van.find(params[:id])
+  #   @van.destroy
   #   flash[:notice] = "Your profile has been obliterated!"
   #   redirect_to signup_path
   # end

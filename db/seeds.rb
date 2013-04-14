@@ -5,26 +5,44 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-(1..20).map do |user, i| 
-  User.create(:user => 
-  {:username => "user#{i}", :email => "user#{i}@gmail.com", :password => 'ann', :password_confirmation => 'ann'})
+
+(1..20).each do |i|
+  User.create({:username => "user#{i}", :email => "user#{i}@gmail.com", :password => "user#{i}", :password_confirmation => "user#{i}"})
 end
 
-(1..20).map riders = [
-        {:user_id => 1, :balance => '100.00'},
-        {:user_id => 2, :balance => '100.00'}]
-passengers = [
-        {:trip_id => 1, :rider_id => },
-        {:trip_id => 2, :rider_id => }]
-drivers = [
-        {:user_id => 1, :supervisor => 'tim'},
-        {:user_id => 2, :supervisor => 'tim'}]
-routes = [
-        {:number => '1B', :origin => 'Castries', :destination => 'Soufriere', :path => 'A'},
-        {:number => '1A', :origin => 'Castries', :destination => 'Soufriere', :path => 'B'}]
-trips = [
-        {:route_id => 1, :driver_id => 1, :van_id => 1, :departure => 'Date.today'},
-        {:route_id => 2, :driver_id => 2, :van_id => 2, :departure => 'Date.tomorrow'}]
-vans = [
-        {:designation => 'big blue bus', :capacity => 15},
-        {:designation => 'big red bus', :capacity => 15}]
+(2..19).each do |i|
+  Rider.create({:user_id => i, :balance => '100.00'})
+end
+
+(2..6).each do |i|
+  Driver.create( 
+  {:user_id => i, :supervisor => "super#{i}"})
+end
+
+(1..5).each do |i|
+  Van.create(
+  {:designation => "van#{i}", :capacity => 15})
+end
+
+(1..5).each do |i|
+  Route.create(
+  {:number => "route#{i}", :origin => 'Castries', :destination => 'Soufriere', :path => 'local'})
+end
+
+Trip.create({:route_id => 1, :driver_id => 5, :van_id => 3, :departure => DateTime.now})
+Trip.create({:route_id => 1, :driver_id => 4, :van_id => 3, :departure => DateTime.now})
+Trip.create({:route_id => 2, :driver_id => 4, :van_id => 1, :departure => DateTime.now})
+Trip.create({:route_id => 3, :driver_id => 3, :van_id => 2, :departure => DateTime.now})
+Trip.create({:route_id => 3, :driver_id => 2, :van_id => 4, :departure => DateTime.now})
+Trip.create({:route_id => 4, :driver_id => 2, :van_id => 5, :departure => DateTime.now})
+Trip.create({:route_id => 5, :driver_id => 1, :van_id => 5, :departure => DateTime.now})
+
+Passenger.create({:trip_id => 1, :rider_id => 7})
+Passenger.create({:trip_id => 1, :rider_id => 8})
+Passenger.create({:trip_id => 1, :rider_id => 9})
+Passenger.create({:trip_id => 1, :rider_id => 10})
+Passenger.create({:trip_id => 2, :rider_id => 11})
+Passenger.create({:trip_id => 2, :rider_id => 12})
+Passenger.create({:trip_id => 2, :rider_id => 13})
+Passenger.create({:trip_id => 2, :rider_id => 14})
+Passenger.create({:trip_id => 2, :rider_id => 15})

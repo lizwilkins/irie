@@ -1,4 +1,4 @@
-<% provide :title, "Users" %>
+<% provide :title, "Routes" %>
 
 <table class="table">
   <tr>
@@ -6,14 +6,13 @@
     <td><b>Origin</b></td>
     <td><b>Destination</b></td>
     <td><b>Path</b></td>    
-    <td><b>Departure</b></td>    
   </tr>
-  <% @users.each do |user| %>
+  <% @routes.each do |route| %>
     <tr>
-      <td><%= trip.username %></td>
-      <td><%= trip.origin %></td>
-      <td><%= trip.destination %></td>
-      <td><%= trip.departure %></td>      
+      <td><%= route.number %></td>
+      <td><%= route.origin %></td>
+      <td><%= route.destination %></td>
+      <td><%= route.path %></td>      
     </tr>
   <% end %>
 </table>
