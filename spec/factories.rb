@@ -32,4 +32,15 @@ FactoryGirl.define do
     balance 100.00
   end    
 
+  factory :driver do
+    sequence(:user_id) {|n| n}
+    sequence(:supervisor) {|n| "super#{n}"}
+  end    
+
+  factory :trip do
+    sequence(:route_id) {|n| n}
+    sequence(:driver_id) {|n| n}
+    sequence(:bus_id) {|n| n}
+    departure Date.today
+  end   
 end

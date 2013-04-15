@@ -37,10 +37,38 @@ describe BusesController do
     end
   end
 
+  context 'PUT update' do
+    let(:bus) {FactoryGirl.create :bus}
+
+    context 'with authorized session' do
+      context 'with valid parameters' do 
+        let(:valid_attrs) {{:license_number => bus.license_number, :capacity => 55, :description => 'yellow submarine'}}
+        let(:valid_params) {{:id => bus.id, :bus => valid_attrs}}
+        before {put :update, valid_params, 'bus_id' => bus.id}
+
+        it 'updates the bus attributes' do
+          Bus.find(bus.id).capacity.should eq valid_attrs[:capacity]
+        end
+
+        it {should set_the_flash[:notice].to("The bus was successfully updated.")}
+        it {should redirect_to buses_path}
+      end
+
+      context 'with invalid parameters' do
+        let(:invalid_attrs) {{:license_number => bus.license_number, :capacity => 55, :description => ""}}
+        let(:invalid_params) {{:id => bus.id, :bus => invalid_attrs}}
+        before {put :update, invalid_params, 'bus_id' => bus.id}
+
+        it {should render_template :edit}
+        it {should set_the_flash[:alert].to("There were errors updating the bus.").now}
+      end
+    end
+  end
+
   context 'DELETE destroy' do 
 
     context 'with authorized session' do
-      it 'destroys a rider' do
+      it 'destroys a bus' do
         bus = FactoryGirl.create :bus
         expect {delete :destroy, {:id => bus.id}, {:bus => bus.id}}.to change(Bus, :count).by(-1)
       end
@@ -48,6 +76,10 @@ describe BusesController do
       let(:bus) {FactoryGirl.create(:bus)}
       before {delete :destroy, {:id => bus.id}, {'bus' => bus.id}}
       it {should redirect_to buses_path}
+    end
+
+    context 'with unauthorized session' do
+      it "doesn't destroy a bus"
     end
   end      
 end

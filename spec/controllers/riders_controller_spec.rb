@@ -52,7 +52,7 @@ describe RidersController do
       let(:invalid_parameters) {{:rider => invalid_attributes}}
  
       before {post :create, invalid_parameters}
-      it {should set_the_flash[:alert].to("There were errors creating your profile.").now}
+      it {should set_the_flash[:alert].to("There were errors creating your rider profile.").now}
       it {should render_template :new}
     end
   end
@@ -84,7 +84,7 @@ describe RidersController do
           Rider.find(rider.id).balance.should eq valid_attributes[:balance]
         end
 
-        it {should set_the_flash[:notice].to("Your profile was successsfully updated.")}
+        it {should set_the_flash[:notice].to("Your rider profile was successfully updated.")}
         it {should redirect_to rider_path(rider)}
       end
 
@@ -94,7 +94,7 @@ describe RidersController do
         before {put :update, invalid_parameters, 'rider_id' => rider.id}
 
         it {should render_template :edit}
-        it {should set_the_flash[:alert].to("There were errors updating your profile.").now}
+        it {should set_the_flash[:alert].to("There were errors updating your rider profile.").now}
       end
     end
 
@@ -113,18 +113,8 @@ describe RidersController do
       it {should redirect_to root_path}
     end
 
-    # context 'without authorized session' do
-      
-    #   it 'does not destroy a rider' do
-    #     rider = FactoryGirl.create(:rider)
-    #     expect {delete :destroy, {:id => rider.id}, {}}.to change(Rider, :count).by(0)
-    #   end
-
-    #   let(:rider) {FactoryGirl.create(:rider)}
-
-    #   before {delete :destroy, {:id => rider.id}, {}}
-    #   it {should set_the_flash[:alert]}
-    #   it {should redirect_to root_path}
-    # end
+    context 'without authorized session' do
+      it 'does not destroy a rider' 
+    end
   end  
 end

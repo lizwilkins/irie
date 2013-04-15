@@ -9,7 +9,11 @@
     <tr>
       <td><%= rider.balance %></td>
       <td><%= rider.user_id %></td>
+      <td><%= link_to 'Edit', edit_rider_path(rider) %></td>
+      <td><%= link_to 'Delete', rider, :method => :delete, :confirm => "Are you sure you want to delete rider?" %></td>
     </tr>
   <% end %>
+
 </table>
 
+<%= link_to 'Create rider', new_rider_path, :class => 'btn btn-primary' %>

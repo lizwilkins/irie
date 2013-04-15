@@ -74,30 +74,27 @@ describe UsersController do
   context 'PUT update' do
     let(:user) {FactoryGirl.create :user}
 
-    context 'with authorized session' do
-      context 'with valid parameters' do 
-        let(:valid_attributes) {{:email => user.email, :username => 'new_name', :password => user.password, :password_confirmation => user.password_confirmation}}
-        let(:valid_parameters) {{:id => user.id, :user => valid_attributes}}
-        before {put :update, valid_parameters, 'user_id' => user.id}
+    context 'with valid parameters' do 
+      let(:valid_attributes) {{:email => user.email, :username => 'new_name', :password => user.password, :password_confirmation => user.password_confirmation}}
+      let(:valid_parameters) {{:id => user.id, :user => valid_attributes}}
+      before {put :update, valid_parameters, 'user_id' => user.id}
 
-        it 'updates the user attributes' do
-          User.find(user.id).username.should eq valid_attributes[:username]
-        end
-
-        it {should set_the_flash[:notice].to("Your account was successsfully updated.")}
-        it {should redirect_to users_path}
+      it 'updates the user attributes' do
+        User.find(user.id).username.should eq valid_attributes[:username]
       end
 
-      context 'with invalid parameters' do
-        let(:invalid_attributes) {{:email => '', :username => '', :password => '', :password_confirmation => ''}}
-        let(:invalid_parameters) {{:id => user.id, :user => invalid_attributes}}
-        before {put :update, invalid_parameters, 'user_id' => user.id}
-
-        it {should render_template :edit}
-        it {should set_the_flash[:alert].to("There were errors updating your account.").now}
-      end
+      it {should set_the_flash[:notice].to("Your account was successfully updated.")}
+      it {should redirect_to users_path}
     end
 
+    context 'with invalid parameters' do
+      let(:invalid_attributes) {{:email => '', :username => '', :password => '', :password_confirmation => ''}}
+      let(:invalid_parameters) {{:id => user.id, :user => invalid_attributes}}
+      before {put :update, invalid_parameters, 'user_id' => user.id}
+
+      it {should render_template :edit}
+      it {should set_the_flash[:alert].to("There were errors updating your account.").now}
+    end
   end
 
   context 'DELETE destroy' do 
@@ -110,7 +107,7 @@ describe UsersController do
 
       let(:user) {FactoryGirl.create(:user)}
       before {delete :destroy, {:id => user.id}, {'user_id' => user.id}}
-      it {should redirect_to root_path}
+      it {should redirect_to users_path}
     end
 
     context 'without authorized session' do
@@ -124,7 +121,7 @@ describe UsersController do
 
       before {delete :destroy, {:id => user.id}, {}}
       it {should set_the_flash[:alert]}
-      it {should redirect_to root_path}
+      it {should redirect_to users_path}
     end
   end
 end

@@ -1,14 +1,13 @@
-
-  <% if @trip.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @trip.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @trip.errors.any? %>
+  <div class="error_messages">
+    <h2>Form is invalid</h2>
+    <ul>
+      <% @trip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   
 <%= form_for @trip do |f| %>
   <div class="field">
@@ -27,5 +26,5 @@
     <%= f.label :departure %><br />
     <%= f.text_field :departure %>
   </div>
-  <div class="actions"><%= f.submit "Submit" %></div>
+  <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>

@@ -12,6 +12,10 @@ describe User do
     it {should validate_uniqueness_of :email}
   end
 
+  context 'password security' do
+    it 'validates strength of a password'
+  end
+
   context 'accessibility' do 
     it {should allow_mass_assignment_of :username}
     it {should allow_mass_assignment_of :password}
@@ -27,10 +31,13 @@ describe User do
     it {should have_one :driver}
   end
 
-  # context '#set_role' do
-  #   it 'returns the username of the user' do
-  #     user = FactoryGirl.create(:user => {:username => 'Jane', :password => 'Doe', :password_confirmation => 'Doe'})
-  #     # user.update_attribute()
-  #     user.username.should eq "Jane"
-  #   end
+  context 'sets role' do
+    it "sets a user's role to 'Admin'"
+  end
+
+  context "checks role" do
+    it "checks that a user's role is 'Admin'"
+  end
+
+
 end

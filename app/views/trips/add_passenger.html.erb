@@ -1,4 +1,4 @@
-<% provide :title, "Trips" %>
+<% provide :title, "Add a Passenger" %>
 
 <table class="table">
   <tr>
@@ -20,5 +20,6 @@
 
 </table>
 
-<%= link_to 'Create trip', new_trip_path, :class => 'btn btn-primary' %>
-
+<% if @song.contributions.find_by_user_id(current_user.id).owner? %>
+  <%= link_to 'Add a Collaborator', select_collaborator_path(@song), :id => @song.id, :class => 'btn btn-primary' %>
+<% end %>

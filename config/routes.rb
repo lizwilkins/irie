@@ -1,13 +1,16 @@
 Irie::Application.routes.draw do
 
-  resources :routes, :except => [:show]   # why ho "show" path???
-  resources :users, :except => :show
+  resources :routes, :except => [:show]   # why no "show" path???
+  resources :users, :except => [:show]
   resources :sessions 
   resources :trips
   resources :passengers
   resources :buses
   resources :drivers
   resources :riders
+
+  match 'trips/:id/select_passenger' => 'trips#select_passenger', :as => :select_passenger
+  match 'trips/:id/add_passenger' => 'trips#add_passenger', :as => :add_passenger, :via => :put
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: "sessions#new", as: 'login'

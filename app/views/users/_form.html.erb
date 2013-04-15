@@ -28,15 +28,15 @@
   </div>
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.password_field :first_name %>
+    <%= f.text_field :first_name %>
   </div> 
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.password_field :last_name %>
+    <%= f.text_field :last_name %>
   </div> 
   <div class="field">
     <%= f.label :phone %><br />
-    <%= f.password_field :phone %>
+    <%= f.text_field :phone %>
   </div>        
-  <div class="actions"><%= f.submit "Submit" %></div>
+  <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>

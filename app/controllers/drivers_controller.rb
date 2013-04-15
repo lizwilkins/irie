@@ -4,11 +4,11 @@ class DriversController < ApplicationController
   end
   
   def create
-    @driver = driver.new(params[:driver])
+    @driver = Driver.new(params[:driver])
     if @driver.save
-      redirect_to drivers_path, notice: "The driver was successfully created."
+      redirect_to drivers_path, notice: "The driver profile was successfully created."
     else
-      flash.now[:alert] = "TThere were errors creating this driver."
+      flash.now[:alert] = "TThere were errors creating the driver profile."
       render :new
     end
   end
@@ -25,10 +25,10 @@ class DriversController < ApplicationController
   def update
     @driver = Driver.find(params[:id])
     if @driver.update_attributes(params[:driver])
-      flash[:notice] = "The driver was successsfully updated."
+      flash[:notice] = "The driver profile was successfully updated."
       redirect_to drivers_path
     else
-      flash.now[:alert] = "There were errors updating this driver."
+      flash.now[:alert] = "There were errors updating the driver profile."
       render :edit
     end
   end

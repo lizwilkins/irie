@@ -9,10 +9,7 @@ describe Route do
     it {should validate_uniqueness_of :number}
   end
 
-  context 'accessibility' do 
-  end
-
-  context 'mass assignment' do
+  context 'accessibility' do
     it {should allow_mass_assignment_of :number}
     it {should allow_mass_assignment_of :origin}
     it {should allow_mass_assignment_of :destination}

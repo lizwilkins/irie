@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def admin_required
     unless current_user && current_user.is_admin?
       flash[:error] = "Sorry, you don't have access to that."
-      redirect_to root_url and return false
+      redirect_to root_path and return false
     end
   end
 end

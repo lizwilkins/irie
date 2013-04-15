@@ -7,7 +7,7 @@
       <% end %>
     </ul>
   </div>
-  <% end %>
+<% end %>
 
 <%= form_for @passenger do |f| %>
   <div class="field">
@@ -19,5 +19,5 @@
     <%= f.text_field :passenger_id %>
   </div>
 
-  <div class="actions"><%= f.submit "Sign Up" %></div>
+  <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>

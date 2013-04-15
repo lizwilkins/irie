@@ -13,7 +13,7 @@ feature 'Sign up' do
     fill_in "user_phone", :with => user.phone
 
     click_button "Submit"
-    page.should have_content 'Your account was successsfully created.'
+    page.should have_content 'Your account was successfully created.'
   end
 end
 

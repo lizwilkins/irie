@@ -1,0 +1,21 @@
+<% provide :title, "Passengers" %>
+
+<table class="table">
+  <tr>
+    <td><b>Last Name</b></td>
+    <td><b>First Name</b></td>
+    <td><b>Phone</b></td>
+  </tr>
+  <% @riders.each do |rider| %>
+    <tr>
+      <td><%= rider.user.last_name %></td>
+      <td><%= rider.user.first_name %></td>
+      <td><%= rider.user.phone %></td>
+
+      <td><%= button_to 'Select',
+          {:controller => :trips, :action => :add_passenger,
+         :rider_id => rider.id, :id => @trip.id},
+         :method => :put, :class => 'btn btn-small btn-primary' %></td>
+    </tr>
+  <% end %>
+</table>
