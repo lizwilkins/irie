@@ -21,7 +21,7 @@ end
 
 (1..5).each do |i|
   Bus.create(
-  {:license_number => "bus#{i}", :capacity => 15})
+  {:license_number => "bus#{i}", :capacity => 15, :description => 'bright red polkadots'})
 end
 
 (1..5).each do |i|

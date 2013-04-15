@@ -1,4 +1,6 @@
 class DriversController < ApplicationController
+  before_filter :admin_required, :only => [:destroy, :edit]
+
   def new
     @driver = Driver.new
   end

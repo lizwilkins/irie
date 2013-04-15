@@ -20,6 +20,10 @@ FactoryGirl.define do
     phone '999.222.3333'
     first_name 'Bob'
     last_name 'Hoskins'
+
+    factory :admin do
+      roles ['admin']
+    end
   end
 
   factory :passenger do

@@ -121,7 +121,7 @@ describe UsersController do
 
       before {delete :destroy, {:id => user.id}, {}}
       it {should set_the_flash[:alert]}
-      it {should redirect_to users_path}
+      it {should redirect_to root_path}
     end
   end
 end

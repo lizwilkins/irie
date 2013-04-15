@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   has_one :rider
   has_one :driver
 
+  def is_admin?
+    roles.include? 'admin'
+  end
+
 end

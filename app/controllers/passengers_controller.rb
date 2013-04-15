@@ -1,9 +1,11 @@
 class PassengersController < ApplicationController
   def new
-    @passenger = Passenger.new
+    trip = Trip.find(params[:trip_id])
+    @passenger = trip.passengers.new(:rider_id => current_user.rider.id)
   end
   
   def create
+    # @trip = Trip.find(params[:id])
     @passenger = Passenger.new(params[:passenger])
     if @passenger.save
       redirect_to passengers_path, notice: 'Passenger "params[:passenger][:rider_id]" has been added to the passenger list.'

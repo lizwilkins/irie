@@ -18,6 +18,10 @@ class RoutesController < ApplicationController
     end
   end
 
+  def show
+    @route = Route.find(params[:id])
+  end
+
   def edit
     @route = Route.find(params[:id])
   end
