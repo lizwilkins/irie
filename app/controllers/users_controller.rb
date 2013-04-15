@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     skip_authorization_check
     @user = User.new(params[:user])
     if @user.save
+      @user.create_rider(:balance => 0.00)
       session[:user_id] = @user.id
       redirect_to root_path, notice: "Your account was successfully created."
     else

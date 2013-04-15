@@ -10,21 +10,15 @@
 <% end %>
   
 <%= form_for @trip do |f| %>
-  <div class="field">
-    <%= f.label :route_id %><br />
+
+    <%= f.label :route_id %>
     <%= f.text_field :route_id %>
-  </div>
-  <div class="field">
-    <%= f.label :driver_id %><br />
+    <%= f.label :driver_id %>
     <%= f.text_field :driver_id %>
-  </div>
-  <div class="field">
-    <%= f.label :bus_id %><br />
+    <%= f.label :bus_id %>
     <%= f.text_field :bus_id %>
-  </div>
-  <div class="field">
-    <%= f.label :departure %><br />
+    <%= f.label :departure %>
     <%= f.text_field :departure %>
-  </div>
+
   <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>

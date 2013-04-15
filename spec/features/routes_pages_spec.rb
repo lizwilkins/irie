@@ -45,4 +45,7 @@ feature 'Routes' do
     click_link 'Delete'
     page.should have_content 'deleted'
   end
+
+  scenario 'viewing trips for a route' do
+  end
 end

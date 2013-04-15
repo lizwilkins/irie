@@ -27,6 +27,12 @@ describe BusesController do
     end
   end
 
+  context 'GET edit' do
+    let(:bus) {FactoryGirl.create(:bus)}
+    before {get :edit, {:id => bus.id}}
+    it {should render_template :edit}
+  end
+
   context 'POST create' do
     context 'with valid params' do
       let(:valid_attrs) {{:license_number => "MT 500", :capacity => 39, :description => "Country Boy"}}
