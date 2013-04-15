@@ -37,6 +37,21 @@ describe DriversController do
     end
   end
 
+  context 'GET edit' do
+    let(:admin) {FactoryGirl.create(:admin)}
+    let(:driver) {FactoryGirl.create(:driver)}
+    context 'with authorized session' do
+      before {get :edit, {:id => driver.id}, {'user_id' => admin.id}}
+      it {should render_template :edit}
+    end
+    context 'with unauthorized session' do
+      let(:user) {FactoryGirl.create(:user)}
+      before {get :edit, {:id => driver.id}, {'user_id' => user.id}}
+      it {should redirect_to root_path}
+      it {should set_the_flash}
+    end
+  end
+
   context 'PUT update' do
     let(:driver) {FactoryGirl.create :driver}
 
@@ -65,21 +80,36 @@ describe DriversController do
     end
   end
 
-  context 'DELETE destroy' do 
+  context 'DELETE destroy' do
+    let(:driver) {FactoryGirl.create(:driver)}
 
     context 'with authorized session' do
-      it 'destroys a driver' do
-        driver = FactoryGirl.create :driver
-        expect {delete :destroy, {:id => driver.id}, {:driver => driver.id}}.to change(Driver, :count).by(-1)
-      end
+      before {driver}
+      let(:admin) {FactoryGirl.create(:admin)}
 
-      let(:driver) {FactoryGirl.create(:driver)}
-      before {delete :destroy, {:id => driver.id}, {'driver' => driver.id}}
-      it {should redirect_to drivers_path}
-    end
+      it 'destroys a driver' do
+        expect {delete :destroy, {:id => driver.id}, {"user_id" => admin.id}}.to change(Driver, :count).by(-1)
+      end
+      
+      it 'redirects to drivers path' do
+        delete :destroy, {:id => driver.id}, {"user_id" => admin.id}
+        should redirect_to drivers_path
+      end
+    end 
 
     context 'with unauthorized session' do
-      it "doesn't destroy a driver"
+      before {driver}
+      let(:user) {FactoryGirl.create(:user)}
+
+      it "doesn't destroy a driver" do
+        expect {delete :destroy, {:id => driver.id}, {"user_id" => user.id}}.to change(Driver, :count).by(0)
+      end
+
+      it "redirects to home page" do
+        delete :destroy, {:id => driver.id}, {"user_id" => user.id}
+        should redirect_to root_path
+      end
+
     end
   end      
 end

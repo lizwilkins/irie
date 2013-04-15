@@ -20,16 +20,23 @@ FactoryGirl.define do
     phone '999.222.3333'
     first_name 'Bob'
     last_name 'Hoskins'
-    role ""
+
+    factory :user_as_rider do
+      after(:create) {|user| FactoryGirl.create(:rider, :user => user)}
+    end
+
+    factory :admin do
+      role 'admin'
+    end
   end
 
   factory :passenger do
-    sequence(:trip_id) {|n| n}
-    sequence(:rider_id) {|n| n}
+    rider
+    trip
   end  
 
   factory :rider do
-    sequence(:user_id) {|n| n}
+    user
     balance 100.00
   end    
 
@@ -43,5 +50,8 @@ FactoryGirl.define do
     sequence(:driver_id) {|n| n}
     sequence(:bus_id) {|n| n}
     departure Date.today
+    factory :trip_with_passengers do
+      after(:create) {|trip| FactoryGirl.create(:passenger, :trip => trip)}
+    end
   end   
 end

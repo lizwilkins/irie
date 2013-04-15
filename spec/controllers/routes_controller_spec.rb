@@ -9,6 +9,7 @@ describe RoutesController do
     it {should route(:put, '/routes/1').to :action => :update, :id => 1}
     it {should route(:delete, '/routes/1').to :action => :destroy, :id => 1}
     it {should route(:get, '/routes').to :action => :index}
+    it {should route(:get, '/routes/1').to :action => :show, :id => 1}
   end
 
   context 'GET new' do
@@ -100,6 +101,8 @@ describe RoutesController do
 
     context 'without authorized session' do
       it 'should not destroy the route'
+        # route = FactoryGirl.create(:route)
+        # expect {delete :destroy, {:id => route.id}}.to change(Route, :count).by(0)
     end
   end
 end

@@ -1,30 +1,14 @@
 <% provide :title, "Trips" %>
 
-<table class="table">
-  <tr>
-    <td><b>Route ID</b></td>
-    <td><b>Driver ID</b></td>
-    <td><b>Van ID</b></td>
-    <td><b>Departure</b></td>    
-  </tr>
-  <% @trips.each do |trip| %>
-    <tr>
-      <td><%= trip.route_id %></td>
-      <td><%= trip.driver_id %></td>
-      <td><%= trip.bus_id %></td>
-      <td><%= trip.departure %></td>      
-
-      <% if can? :update, trip %>
-        <td><%= link_to "Edit", edit_trip_path(trip) %></td>
-      <% end %>
-      <% if can? :destroy, trip %>
-        <td><%= link_to "Delete", trip, :method => :delete, :confirm => "Are you sure you want to delete this trip?" %></td>
-      <% end %>
-    </tr>
-  <% end %>
-
-</table>
-
 <% if can? :create, Trip %>
-  <p><%= link_to "Create trip", new_trip_path, :class => 'btn btn-primary' %></p>
+  <%= link_to 'Create trip', new_trip_path, :class => 'btn btn-success pull-right' %>
 <% end %>
+
+
+
+<%= render :partial => 'list', :locals => {:trips => @trips} %>
+
+
+
+
+
