@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
     roles.include? 'admin'
   end
 
+  
+
 end

@@ -39,7 +39,11 @@ describe UsersController do
         expect {post :create, valid_parameters}.to change(User, :count).by(1) 
       end
 
-      context 'before create' do 
+      it 'creates a rider for the new user' do
+        expect {post :create, valid_parameters}.to change(Rider, :count).by(1) 
+      end
+
+      context 'response' do 
         before {post :create, valid_parameters}
         it {should redirect_to root_path}
         it {should set_the_flash[:notice]}
