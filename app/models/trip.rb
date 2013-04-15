@@ -1,9 +1,9 @@
 class Trip < ActiveRecord::Base
 
-  validates :driver_id, :van_id, :route_id, :departure, :presence => true
-  attr_accessible :driver_id, :van_id, :route_id, :departure
+  validates :driver_id, :bus_id, :route_id, :departure, :presence => true
+  attr_accessible :driver_id, :bus_id, :route_id, :departure
 
-  belongs_to :van
+  belongs_to :bus
   belongs_to :route
   belongs_to :driver
 

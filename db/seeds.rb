@@ -20,8 +20,8 @@ end
 end
 
 (1..5).each do |i|
-  Van.create(
-  {:designation => "van#{i}", :capacity => 15})
+  Bus.create(
+  {:license_number => "bus#{i}", :capacity => 15})
 end
 
 (1..5).each do |i|
@@ -29,13 +29,13 @@ end
   {:number => "route#{i}", :origin => 'Castries', :destination => 'Soufriere', :path => 'local'})
 end
 
-Trip.create({:route_id => 1, :driver_id => 5, :van_id => 3, :departure => DateTime.now})
-Trip.create({:route_id => 1, :driver_id => 4, :van_id => 3, :departure => DateTime.now})
-Trip.create({:route_id => 2, :driver_id => 4, :van_id => 1, :departure => DateTime.now})
-Trip.create({:route_id => 3, :driver_id => 3, :van_id => 2, :departure => DateTime.now})
-Trip.create({:route_id => 3, :driver_id => 2, :van_id => 4, :departure => DateTime.now})
-Trip.create({:route_id => 4, :driver_id => 2, :van_id => 5, :departure => DateTime.now})
-Trip.create({:route_id => 5, :driver_id => 1, :van_id => 5, :departure => DateTime.now})
+Trip.create({:route_id => 1, :driver_id => 5, :bus_id => 3, :departure => DateTime.now})
+Trip.create({:route_id => 1, :driver_id => 4, :bus_id => 3, :departure => DateTime.now})
+Trip.create({:route_id => 2, :driver_id => 4, :bus_id => 1, :departure => DateTime.now})
+Trip.create({:route_id => 3, :driver_id => 3, :bus_id => 2, :departure => DateTime.now})
+Trip.create({:route_id => 3, :driver_id => 2, :bus_id => 4, :departure => DateTime.now})
+Trip.create({:route_id => 4, :driver_id => 2, :bus_id => 5, :departure => DateTime.now})
+Trip.create({:route_id => 5, :driver_id => 1, :bus_id => 5, :departure => DateTime.now})
 
 Passenger.create({:trip_id => 1, :rider_id => 7})
 Passenger.create({:trip_id => 1, :rider_id => 8})

@@ -4,11 +4,11 @@ feature 'Routes' do
   scenario 'Create a new route' do
     visit routes_path
     click_link 'Create route'
-    fill_in 'Number', :with => '1A'
+    fill_in 'Number', :with => '11A'
     fill_in 'Origin', :with => 'Castries'
     fill_in 'Destination', :with => 'Gros Islet'
     click_button 'Submit'
-    page.should have_content '1A'
+    page.should have_content '11A'
   end
 
   scenario 'creating a new route with invalid input' do

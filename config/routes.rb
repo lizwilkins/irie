@@ -5,7 +5,7 @@ Irie::Application.routes.draw do
   resources :sessions 
   resources :trips
   resources :passengers
-  resources :vans
+  resources :buses
   resources :drivers
   resources :riders
 

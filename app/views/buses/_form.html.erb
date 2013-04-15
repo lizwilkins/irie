@@ -1,0 +1,18 @@
+<% if @bus.errors.any? %>
+  <h4>One or more errors must be corrected first:</h4>
+  <ul>
+  <% @bus.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for bus do |f| %>
+  <%= f.label :license_number %>
+  <%= f.text_field :license_number %>
+  <%= f.label :capacity %>
+  <%= f.select :capacity, (1..99) %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+<% end %>
