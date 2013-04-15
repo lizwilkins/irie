@@ -6,8 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-(1..20).each do |i|
+User.create({:role => 'admin', :username => "admin", :email => "admin@gmail.com", :password => "admin", :password_confirmation => "admin"})
+
+(2..5).each do |i|
   User.create({:username => "user#{i}", :email => "user#{i}@gmail.com", :password => "user#{i}", :password_confirmation => "user#{i}"})
+end
+
+(6..10).each do |i|
+  User.create({:role => 'supervisor', :username => "super#{i}", :email => "super#{i}@gmail.com", :password => "super#{i}", :password_confirmation => "super#{i}"})
+end
+
+(11..15).each do |i|
+  User.create({:role => 'supervisor', :username => "agent#{i}", :email => "agent#{i}@gmail.com", :password => "agent#{i}", :password_confirmation => "agent#{i}"})
 end
 
 (2..19).each do |i|
@@ -20,8 +30,8 @@ end
 end
 
 (1..5).each do |i|
-  Bus.create(
-  {:license_number => "bus#{i}", :capacity => 15, :description => 'bright red polkadots'})
+  Bus.create({:license_number => "bus#{i}", :capacity => 15, :description => 'bright red polkadots'})
+
 end
 
 (1..5).each do |i|

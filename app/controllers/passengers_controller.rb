@@ -1,5 +1,8 @@
 class PassengersController < ApplicationController
   before_filter :admin_required, :only => [:index]
+
+  load_and_authorize_resource
+
   def new
     trip = Trip.find(params[:trip_id])
     @passenger = trip.passengers.new(:rider_id => current_user.rider.id)

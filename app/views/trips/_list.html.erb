@@ -16,8 +16,12 @@
       <td><%= trip.driver.user.first_name %></td>
       <td><%= trip.bus.license_number %></td>
       <td><%= link_to 'Add Me', new_trip_passenger_path(trip), :class => 'btn btn-mini btn-success' %></td>
-      <td><%= link_to 'Edit', edit_trip_path(trip), :class => 'btn btn-mini btn-info' %></td>
-      <td><%= link_to 'Delete', trip, :method => :delete, :class => 'btn btn-mini btn-warning', :confirm => "Are you sure you want to delete trip?" %></td>
+      <% if can? :update, trip %>
+        <td><%= link_to 'Edit', edit_trip_path(trip), :class => 'btn btn-mini btn-info' %></td>
+      <% end %>
+      <% if can? :destroy, trip %>
+        <td><%= link_to 'Delete', trip, :method => :delete, :class => 'btn btn-mini btn-warning', :confirm => "Are you sure you want to delete trip?" %></td>
+      <% end %>
     </tr>
   <% end %>
 

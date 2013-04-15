@@ -1,4 +1,7 @@
 class RidersController < ApplicationController
+
+  load_and_authorize_resource
+
   def new
     @rider = Rider.new
   end

@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:new, :create, :index]
+  load_and_authorize_resource
 
   def new
     @user = User.new
   end
   
   def create
+    skip_authorization_check
     @user = User.new(params[:user])
     if @user.save
       @user.create_rider(:balance => 0.00)
@@ -44,7 +45,9 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.try(:destroy)
-    session[:user_id] = nil  #not for admin???
+    if @user.role != 'admin'
+      session[:user_id] = nil
+    end
     flash[:notice] = "The user was successfully deleted."
     redirect_to users_path
 

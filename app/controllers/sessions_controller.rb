@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
-  # before_filter :authenticate_user, :only => [:show, :destroy]
-  before_filter :authorize, :only => [:destroy]
+  skip_authorization_check
 
   def new
   end

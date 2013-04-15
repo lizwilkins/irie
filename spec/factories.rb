@@ -26,7 +26,7 @@ FactoryGirl.define do
     end
 
     factory :admin do
-      roles ['admin']
+      role 'admin'
     end
   end
 

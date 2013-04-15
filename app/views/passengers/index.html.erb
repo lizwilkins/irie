@@ -9,11 +9,14 @@
     <tr>
       <td><%= passenger.trip_id %></td>
       <td><%= passenger.rider_id %></td>
-      <td><%= link_to 'Delete', passenger, :method => :delete, :confirm => "Are you sure you want to delete this passenger?" %></td>
+      <% if can? :destroy, passenger %>
+        <td><%= link_to "Delete", passenger, :method => :delete, :confirm => "Are you sure you want to delete this passenger?" %></td>
+      <% end %>
     </tr>
   <% end %>
 
 </table>
 
-<%= link_to 'Create passenger', new_passenger_path, :class => 'btn btn-primary' %>
-
+<% if can? :create, Passenger %>
+  <p><%= link_to "Add passenger", new_passenger_path, :class => 'btn btn-primary' %></p>
+<% end %>

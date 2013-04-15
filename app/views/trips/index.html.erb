@@ -1,7 +1,14 @@
 <% provide :title, "Trips" %>
-<%= link_to 'Create trip', new_trip_path, :class => 'btn btn-success pull-right' %>
+
+<% if can? :create, Trip %>
+  <%= link_to 'Create trip', new_trip_path, :class => 'btn btn-success pull-right' %>
+<% end %>
+
+
 
 <%= render :partial => 'list', :locals => {:trips => @trips} %>
+
+
 
 
 
