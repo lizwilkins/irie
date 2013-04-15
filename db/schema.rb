@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412234032) do
+ActiveRecord::Schema.define(:version => 20130415192441) do
 
   create_table "buses", :force => true do |t|
     t.string   "license_number"
@@ -64,12 +64,12 @@ ActiveRecord::Schema.define(:version => 20130412234032) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "username"
-    t.string   "roles",           :default => "--- []"
+    t.string   "role"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

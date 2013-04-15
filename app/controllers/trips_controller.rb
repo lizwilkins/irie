@@ -1,4 +1,7 @@
 class TripsController < ApplicationController
+  
+  load_and_authorize_resource
+
   def new
     @trip = Trip.new
   end

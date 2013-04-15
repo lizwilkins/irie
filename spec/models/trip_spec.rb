@@ -16,8 +16,8 @@ describe Trip do
   end
 
   context 'associations' do
-    it {should have_many :riders}
     it {should have_many :passengers}
+    it {should have_many(:riders).through(:passengers)}
     it {should belong_to :bus}
     it {should belong_to :route}
     it {should belong_to :driver}

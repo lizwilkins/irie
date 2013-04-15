@@ -1,4 +1,7 @@
 class DriversController < ApplicationController
+  
+  load_and_authorize_resource
+
   def new
     @driver = Driver.new
   end

@@ -10,17 +10,22 @@
   </tr>
   <% @drivers.each do |driver| %>
     <tr>
-      <td><%=  %></td>
-      <td><%=  %></td>
-      <td><%=  %></td>
-      <td><%=  %></td>
+      <td><%= driver.user.first_name %></td>
+      <td><%= driver.user.last_name %></td>
+      <td><%= driver.user.phone %></td>
       <td><%= driver.supervisor %></td>
-      <td><%= link_to 'Edit', edit_driver_path(driver) %></td>
-      <td><%= link_to 'Delete', driver, :method => :delete, :confirm => "Are you sure you want to delete this driver?" %></td>
+
+      <% if can? :update, driver %>
+        <td><%= link_to "Edit", edit_driver_path(driver) %></td>
+      <% end %>
+      <% if can? :destroy, driver %>
+        <td><%= link_to "Delete", driver, :method => :delete, :confirm => "Are you sure you want to delete this driver?" %></td>
+      <% end %>
     </tr>
   <% end %>
 
 </table>
 
-<%= link_to 'Create driver', new_driver_path, :class => 'btn btn-primary' %>
-
+<% if can? :create, Driver %>
+  <p><%= link_to "Create driver", new_driver_path, :class => 'btn btn-primary' %></p>
+<% end %>

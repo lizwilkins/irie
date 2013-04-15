@@ -8,7 +8,7 @@ gem 'thin'
 
 gem 'jquery-rails'
 gem 'pg'
-gem 'easy_roles'
+gem 'cancan'
 gem 'bootstrap-sass'
 
 gem 'rb-fsevent'
