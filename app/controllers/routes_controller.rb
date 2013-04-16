@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @routes = Route.all
+    @routes = Route.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
@@ -23,6 +23,7 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
+    @trips = @route.trips.paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
