@@ -2,16 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'thin'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'jquery-rails'
 gem 'pg'
 gem 'cancan'
 gem 'bootstrap-sass'
-
 gem 'rb-fsevent'
+gem 'bootstrap-will_paginate'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

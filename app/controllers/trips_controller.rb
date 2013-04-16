@@ -18,7 +18,7 @@ class TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.all
+    @trips = Trip.paginate(:page => params[:page], :per_page => 10)  #default is 30, remove '.per_page(5)' for default
   end
 
   def show
