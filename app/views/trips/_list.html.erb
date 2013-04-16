@@ -4,7 +4,6 @@
     <td><b>Start</b></td>
     <td><b>End</b></td>
     <td><b>Time</b></td>  
-    <td><b>Driver</b></td>
     <td><b>Bus Number</b></td>  
   </tr>
   <% trips.each do |trip| %>
@@ -13,9 +12,10 @@
       <td><%= trip.route.origin %></td>
       <td><%= trip.route.destination %></td>
       <td><%= trip.departure.localtime.strftime("%x %H:%M") %></td>
-      <td><%= "trip.driver.user.first_name" %></td>
       <td><%= trip.bus.license_number %></td>
-      <td><%= link_to 'Add Me', new_trip_passenger_path(trip), :class => 'btn btn-mini btn-success' %></td>
+      <% if current_user %>
+        <td><%= link_to 'Add Me', new_trip_passenger_path(trip), :class => 'btn btn-mini btn-success' %></td>
+       <% end %>
       <% if can? :update, trip %>
         <td><%= link_to 'Edit', edit_trip_path(trip), :class => 'btn btn-mini btn-info' %></td>
       <% end %>
