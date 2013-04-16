@@ -24,7 +24,8 @@ class UsersController < ApplicationController
     end
 
   def edit
-    @user = current_user
+    # @user = current_user
+    @user = User.find(params[:id])
   end
 
   def show
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.try(:destroy)
-    if @user.role != 'admin'
+    if current_user.role != 'admin'
       session[:user_id] = nil
     end
     flash[:notice] = "The user was successfully deleted."

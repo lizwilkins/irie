@@ -17,7 +17,7 @@ end
 end
 
 (11..15).each do |i|
-  User.create({:role => 'supervisor', :username => "agent#{i}", :email => "agent#{i}@gmail.com", :password => "agent#{i}", :password_confirmation => "agent#{i}"})
+  User.create({:role => 'agent', :username => "agent#{i}", :email => "agent#{i}@gmail.com", :password => "agent#{i}", :password_confirmation => "agent#{i}"})
 end
 
 (2..19).each do |i|

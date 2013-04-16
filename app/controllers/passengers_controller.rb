@@ -31,6 +31,5 @@ class PassengersController < ApplicationController
     @passenger.try(:destroy)
     flash[:notice] = "This passenger was deleted from the passenger list."
     redirect_to trip_passengers_path(@trip)
-    # redirect_to trip_path(trip)
   end
 end

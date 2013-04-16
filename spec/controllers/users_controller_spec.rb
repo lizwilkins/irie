@@ -11,90 +11,95 @@ describe UsersController do
   end
 
   context 'GET index' do
-    let(:user) {FactoryGirl.create(:user)}
+    let(:admin) {FactoryGirl.create(:admin)}
 
     context 'with authorized session' do
-      before {get :index, {}, {'user_id' => user.id}}
+      before {get :index, {}, {'user_id' => admin.id}}
       it {should render_template :index}
     end
 
+    let(:user) {FactoryGirl.create(:user_as_rider)}
+
     context 'without authorized session' do
-      before {get :index, {}, {}}
+      before {get :index, {}, {'user_id' => user.id}}
       it {should render_template :index}
     end
   end
 
   context 'GET new' do
+    let(:user) {FactoryGirl.create(:user_as_rider)}
     before {get :new}
 
     it {should render_template :new}
   end
 
   context 'POST create' do 
-    context 'with valid parameters' do
-      let(:valid_attributes) {{:email => "plowry@scu.edu", :password => "abc1234", :password_confirmation => 'abc1234', :username => 'plowry'}}
-      let(:valid_parameters) {{:user => valid_attributes}}
+    context 'non-admin user' do 
+      context 'with valid parameters' do
+        let(:valid_attributes) {{:email => "plowry@scu.edu", :password => "abc1234", :password_confirmation => 'abc1234', :username => 'plowry'}}
+        let(:valid_parameters) {{:user => valid_attributes}}
 
-      it 'creates a new user' do
-        expect {post :create, valid_parameters}.to change(User, :count).by(1) 
+        it 'creates a new user' do
+          expect {post :create, valid_parameters}.to change(User, :count).by(1) 
+        end
+
+        it 'creates a rider profile for the new user' do
+          expect {post :create, valid_parameters}.to change(Rider, :count).by(1) 
+        end
+
+        context 'response' do 
+          before {post :create, valid_parameters}
+          it {should redirect_to root_path}
+          it {should set_the_flash[:notice]}
+          it {should set_session(:user_id)}
+        end
       end
 
-      it 'creates a rider for the new user' do
-        expect {post :create, valid_parameters}.to change(Rider, :count).by(1) 
+      context 'with invalid parameters' do
+        let(:invalid_attributes) {{:email => "", :password => "", :password_confirmation => '', :username => ''}}
+        let(:invalid_parameters) {{:user => invalid_attributes}}
+   
+        before {post :create, invalid_parameters}
+        it {should set_the_flash[:alert].to("There were errors creating your account.").now}
+        it {should render_template :new}
       end
-
-      context 'response' do 
-        before {post :create, valid_parameters}
-        it {should redirect_to root_path}
-        it {should set_the_flash[:notice]}
-        it {should set_session(:user_id)}
-      end
-    end
-
-    context 'with invalid parameters' do
-      let(:invalid_attributes) {{:email => "", :password => "", :password_confirmation => '', :username => ''}}
-      let(:invalid_parameters) {{:user => invalid_attributes}}
- 
-      before {post :create, invalid_parameters}
-      it {should set_the_flash[:alert].to("There were errors creating your account.").now}
-      it {should render_template :new}
     end
   end
 
   context 'GET edit' do
-    let(:user) {FactoryGirl.create :user}
-    before {get :edit, {:id => user.id}, {'user_id' => user.id}}
+    let(:admin) {FactoryGirl.create :admin}
+    before {get :edit, {:id => admin.id}, {'user_id' => admin.id}}
 
     it {should render_template :edit}
   end
 
   context 'GET show' do
-    let(:user) {FactoryGirl.create :user}
-    before {get :edit, {:id => user.id}, {'user_id' => user.id}}
+    let(:admin) {FactoryGirl.create :admin}
+    before {get :edit, {:id => admin.id}, {'user_id' => admin.id}}
 
     it {should render_template :edit}
   end
 
   context 'PUT update' do
-    let(:user) {FactoryGirl.create :user}
+    let(:admin) {FactoryGirl.create :admin}
 
     context 'with valid parameters' do 
-      let(:valid_attributes) {{:email => user.email, :username => 'new_name', :password => user.password, :password_confirmation => user.password_confirmation}}
-      let(:valid_parameters) {{:id => user.id, :user => valid_attributes}}
-      before {put :update, valid_parameters, 'user_id' => user.id}
+      let(:valid_attributes) {{:email => admin.email, :username => 'new_name', :password => admin.password, :password_confirmation => admin.password_confirmation}}
+      let(:valid_parameters) {{:id => admin.id, :user => valid_attributes}}
+      before {put :update, valid_parameters, 'user_id' => admin.id}
 
-      it 'updates the user attributes' do
-        User.find(user.id).username.should eq valid_attributes[:username]
+      it 'updates the admin attributes' do
+        admin.find(admin.id).username.should eq valid_attributes[:username]
       end
 
       it {should set_the_flash[:notice].to("Your account was successfully updated.")}
-      it {should redirect_to users_path}
+      it {should redirect_to admins_path}
     end
 
     context 'with invalid parameters' do
       let(:invalid_attributes) {{:email => '', :username => '', :password => '', :password_confirmation => ''}}
-      let(:invalid_parameters) {{:id => user.id, :user => invalid_attributes}}
-      before {put :update, invalid_parameters, 'user_id' => user.id}
+      let(:invalid_parameters) {{:id => admin.id, :user => invalid_attributes}}
+      before {put :update, invalid_parameters, 'user_id' => admin.id}
 
       it {should render_template :edit}
       it {should set_the_flash[:alert].to("There were errors updating your account.").now}
@@ -104,24 +109,26 @@ describe UsersController do
   context 'DELETE destroy' do 
 
     context 'with authorized session' do
-      it 'destroys a user' do
-        user = FactoryGirl.create :user
-        expect {delete :destroy, {:id => user.id}, {:user_id => user.id}}.to change(User, :count).by(-1)
+      it 'destroys a user as admin' do
+        admin = FactoryGirl.create(:admin)
+        user = FactoryGirl.create(:user_as_rider)
+        expect {delete :destroy, {:id => user.id}, {:user_id => admin.id}}.to change(User, :count).by(-1)
       end
 
-      let(:user) {FactoryGirl.create(:user)}
-      before {delete :destroy, {:id => user.id}, {'user_id' => user.id}}
+      let(:admin) {FactoryGirl.create(:admin)}
+      let(:user) {FactoryGirl.create(:user_as_rider)}
+      before {delete :destroy, {:id => user.id}, {'user_id' => admin.id}}
       it {should redirect_to users_path}
     end
 
     context 'without authorized session' do
       
       it 'does not destroy a user' do
-        user = FactoryGirl.create(:user)
+        user = FactoryGirl.create(:user_as_rider)
         expect {delete :destroy, {:id => user.id}, {}}.to change(User, :count).by(0)
       end
 
-      let(:user) {FactoryGirl.create(:user)}
+      let(:user) {FactoryGirl.create(:user_as_rider)}
 
       before {delete :destroy, {:id => user.id}, {}}
       it {should set_the_flash[:alert]}

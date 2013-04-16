@@ -28,7 +28,6 @@ describe PassengersController do
     let(:trip) {FactoryGirl.create(:trip)}
     let(:user) {FactoryGirl.create(:user_as_rider)}
     before {get :new, {:trip_id => trip.id}, {'user_id' => user.id}}
-
     it {should render_template :new}
   end
 
