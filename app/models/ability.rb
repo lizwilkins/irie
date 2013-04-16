@@ -7,24 +7,32 @@ class Ability
     when user.role == 'admin'
       can :manage, :all
     when user.role == 'agent'
+      can [:show, :update, :destroy], User, :user => @current_user
+
       can [:create, :read, :destroy], Passenger
       can [:create, :read, :update, :destroy], User, :user => @current_user 
     when user.role == 'supervisor'
+      can [:create], User
+      can [:show, :update, :destroy], User, :user => @current_user
+
       can [:create, :read, :update, :destroy], Driver
       can [:read], Trip
       can [:update], Trip   #driver only
-      can [:create, :read, :update, :destroy], User, :user => @current_user
     when user.role == 'driver'
+      can [:show, :update, :destroy], User, :user => @current_user
+
       can [:read], Driver     
       can [:update], Driver     # contact info only
-      can [:create, :read, :update, :destroy], User, :user => @current_user
     else  # guest user (not logged in) or rider user
-      can :index, Route  # plus :departures
-      can [:create, :read, :destroy], Passenger  #, :rider_id => current_user.rider.id
-
-      can [:create, :read, :update, :destroy], Rider  #, :user_id => current_user.id
-      can [:read, :update, :destroy], User, :user => @current_user
       can [:create], User
+      can [:show, :update, :destroy], User, :user => @current_user
+
+      can [:read], Route
+
+      can [:create], Passenger
+      can [:show, :destroy], Passenger  #, :rider_id => current_user.rider.id
+
+      # can [:create, :show, :update, :destroy], Rider, :user_id => @current_user.id
     end 
   end
 end
