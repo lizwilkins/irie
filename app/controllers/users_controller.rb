@@ -3,11 +3,12 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def new
+    # skip_authorization_check
     @user = User.new
   end
   
   def create
-    skip_authorization_check
+    # skip_authorization_check
     @user = User.new(params[:user])
     if @user.save
       @user.create_rider(:balance => 0.00)
@@ -46,7 +47,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.try(:destroy)
-    p current_user
     if current_user.role != 'admin'
       session[:user_id] = nil
     end

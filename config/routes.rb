@@ -3,6 +3,7 @@ Irie::Application.routes.draw do
   resources :routes
   resources :users, :except => [:show]
   resources :sessions 
+  resources :passengers
   resources :trips do
     resources :passengers
   end

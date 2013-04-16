@@ -19,8 +19,11 @@ class TripsController < ApplicationController
 
   def index
     @trips = Trip.all
-      render :index
-    end
+  end
+
+  def show
+    @trip = Trip.find(params[:id])
+  end  
 
   def edit
     @trip = Trip.find(params[:id])
