@@ -38,7 +38,7 @@ class RidersController < ApplicationController
 
   def destroy
     @rider = Rider.find(params[:id])
-    @rider.destroy
+    @rider.try(:destroy)
     flash[:notice] = "Your rider profile was successfully deleted."
     redirect_to root_path
   end

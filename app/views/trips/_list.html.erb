@@ -13,7 +13,7 @@
       <td><%= trip.route.origin %></td>
       <td><%= trip.route.destination %></td>
       <td><%= trip.departure.localtime.strftime("%x %H:%M") %></td>
-      <td><%= trip.driver.user.first_name %></td>
+      <td><%= "trip.driver.user.first_name" %></td>
       <td><%= trip.bus.license_number %></td>
       <td><%= link_to 'Add Me', new_trip_passenger_path(trip), :class => 'btn btn-mini btn-success' %></td>
       <% if can? :update, trip %>

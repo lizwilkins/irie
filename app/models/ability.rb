@@ -21,8 +21,9 @@ class Ability
     else  # guest user (not logged in) or rider user
       can :index, Route  # plus :departures
       can [:create, :read, :destroy], Passenger  #, :rider_id => current_user.rider.id
-      can [:crud], Rider  #, :user_id => current_user.id
-      can [:create, :read, :update, :destroy], User, :user => @current_user
+      can [:create, :read, :update, :destroy], Rider  #, :user_id => current_user.id
+      can [:read, :update, :destroy], User, :user => @current_user
+      can [:create], User
     end 
   end
 end

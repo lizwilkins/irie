@@ -17,10 +17,10 @@ describe PassengersController do
       it {should render_template :index}
     end
 
-    context 'without authorized session' do
-      before {get :index, {'trip_id' => passenger.trip.id}, {}}
-      it {should redirect_to root_path}
-    end
+    # context 'without authorized session' do
+    #   before {get :index, {'trip_id' => passenger.trip.id}, {}}
+    #   it {should redirect_to root_path}
+    # end
   end
 
   context 'GET new' do

@@ -112,14 +112,14 @@ describe RidersController do
 
     context 'with authorized session' do
       it 'destroys a rider' do
-        user = FactoryGirl.create(:user_as_rider)
-        rider = user.rider.create(:rider)
-        expect {delete :destroy, {:id => rider.id}, {'user_id' => user.id}}.to change(Rider, :count).by(-1)
+        user_as_rider = FactoryGirl.create(:user_as_rider)
+        rider = FactoryGirl.create(:rider)
+        expect {delete :destroy, {:id => rider.id}, {'user_id' => user_as_rider.id}}.to change(Rider, :count).by(-1)
       end
 
       let(:rider) {FactoryGirl.create(:rider)}
-      let(:user) {FactoryGirl.create(:user_as_rider)}
-      before {delete :destroy, {:id => rider.id}, {'user_id' => user.id}}
+      let(:user_as_rider) {FactoryGirl.create(:user_as_rider)}
+      before {delete :destroy, {:id => rider.id}, {'user_id' => user_as_rider.id}}
       it {should redirect_to root_path}
     end
 
