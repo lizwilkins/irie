@@ -11,7 +11,6 @@ describe PassengersController do
   context 'GET index' do
     let(:passenger) {FactoryGirl.create(:passenger)}
     let(:admin) {FactoryGirl.create(:admin)}
-    let(:user) {FactoryGirl.create(:user_as_rider)}
 
     context 'with authorized session' do
       before {get :index, {'trip_id' => passenger.trip.id}, {'user_id' => admin.id}}
@@ -19,7 +18,7 @@ describe PassengersController do
     end
 
     context 'without authorized session' do
-      before {get :index, {'trip_id' => passenger.trip.id}, {'user_id' => user.id}}
+      before {get :index, {'trip_id' => passenger.trip.id}, {}}
       it {should redirect_to root_path}
     end
   end

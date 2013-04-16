@@ -12,24 +12,28 @@ describe BusesController do
   end
 
   context 'GET new' do
-    before {get :new}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :new, {}, {:user_id => admin.id}}
     it {should render_template :new}
   end
 
   context 'GET index' do
-    before {get :index}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :index, {}, {:user_id => admin.id}}
     it {should render_template :index}
 
     it "assigns all buses as @buses" do
       bus = FactoryGirl.create(:bus)
-      get :index
+      admin = FactoryGirl.create(:admin)
+      get :index, {}, {:user_id => admin.id}
       assigns(:buses).should eq([bus])
     end
   end
 
   context 'GET edit' do
     let(:bus) {FactoryGirl.create(:bus)}
-    before {get :edit, {:id => bus.id}}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :edit, {:id => bus.id}, {:user_id => admin.id}}
     it {should render_template :edit}
   end
 
@@ -37,8 +41,10 @@ describe BusesController do
     context 'with valid params' do
       let(:valid_attrs) {{:license_number => "MT 500", :capacity => 39, :description => "Country Boy"}}
       let(:valid_params) {{:bus => valid_attrs}}
+      let(:admin) {FactoryGirl.create(:admin)}
+
       it 'creates a new bus' do
-        expect {post :create, valid_params}.to change(Bus, :count).by(1)
+        expect {post :create, valid_params, {:user_id => admin.id}}.to change(Bus, :count).by(1)
       end
     end
   end
@@ -50,7 +56,8 @@ describe BusesController do
       context 'with valid parameters' do 
         let(:valid_attrs) {{:license_number => bus.license_number, :capacity => 55, :description => 'yellow submarine'}}
         let(:valid_params) {{:id => bus.id, :bus => valid_attrs}}
-        before {put :update, valid_params, 'bus_id' => bus.id}
+        let(:admin) {FactoryGirl.create(:admin)}
+        before {put :update, valid_params, 'user_id' => admin.id}
 
         it 'updates the bus attributes' do
           Bus.find(bus.id).capacity.should eq valid_attrs[:capacity]
@@ -63,7 +70,8 @@ describe BusesController do
       context 'with invalid parameters' do
         let(:invalid_attrs) {{:license_number => bus.license_number, :capacity => 55, :description => ""}}
         let(:invalid_params) {{:id => bus.id, :bus => invalid_attrs}}
-        before {put :update, invalid_params, 'bus_id' => bus.id}
+        let(:admin) {FactoryGirl.create(:admin)}
+        before {put :update, invalid_params, 'user_id' => admin.id}
 
         it {should render_template :edit}
         it {should set_the_flash[:alert].to("There were errors updating the bus.").now}
@@ -80,7 +88,8 @@ describe BusesController do
       end
 
       let(:bus) {FactoryGirl.create(:bus)}
-      before {delete :destroy, {:id => bus.id}, {'bus' => bus.id}}
+      let(:admin) {FactoryGirl.create(:admin)}
+      before {delete :destroy, {:id => bus.id}, {'user_id' => admin.id}}
       it {should redirect_to buses_path}
     end
 

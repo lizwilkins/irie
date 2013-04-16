@@ -13,21 +13,22 @@ describe RidersController do
 
   context 'GET index' do
     let(:rider) {FactoryGirl.create(:rider)}
+    let(:admin) {FactoryGirl.create(:admin)}
 
     context 'with authorized session' do
-      before {get :index, {}, {'rider_id' => rider.id}}
+      before {get :index, {}, {'user_id' => admin.id}}
       it {should render_template :index}
     end
 
-    context 'without authorized session' do
-      before {get :index, {}, {}}
-      it {should render_template :index}
-    end
+    # context 'without authorized session' do
+    #   before {get :index, {}, {}}
+    #   it {should set_the_flash[:alert].to("Not authorized.").now}
+    # end
   end
 
   context 'GET new' do
-    before {get :new}
-
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :new, {}, {'user_id' => admin.id}}
     it {should render_template :new}
   end
 
@@ -36,13 +37,15 @@ describe RidersController do
       let(:valid_attributes) {{:balance => 100.00, :user_id => 100}}
       let(:valid_parameters) {{:rider => valid_attributes}}
       let(:rider) {FactoryGirl.create :rider}
+      let(:admin) {FactoryGirl.create(:admin)}
 
       it 'creates a new rider' do
-        expect {post :create, valid_parameters}.to change(Rider, :count).by(1) 
+        expect {post :create, valid_parameters, {'user_id' => admin.id}}.to change(Rider, :count).by(1) 
       end
 
       context 'before create' do 
-        before {post :create, valid_parameters}
+        let(:admin) {FactoryGirl.create(:admin)}
+        before {post :create, valid_parameters, {'user_id' => admin.id}}
         it {should set_the_flash[:notice]}
       end
     end
@@ -50,8 +53,9 @@ describe RidersController do
     context 'with invalid parameters' do
       let(:invalid_attributes) {{:balance =>nil}}
       let(:invalid_parameters) {{:rider => invalid_attributes}}
+      let(:admin) {FactoryGirl.create(:admin)}
  
-      before {post :create, invalid_parameters}
+      before {post :create, invalid_parameters, {'user_id' => admin.id}}
       it {should set_the_flash[:alert].to("There were errors creating your rider profile.").now}
       it {should render_template :new}
     end
@@ -59,26 +63,29 @@ describe RidersController do
 
   context 'GET edit' do
     let(:rider) {FactoryGirl.create :rider}
-    before {get :edit, {:id => rider.id}, {'rider_id' => rider.id}}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :edit, {:id => rider.id}, {'user_id' => admin.id}}
 
     it {should render_template :edit}
   end
 
   context 'GET show' do
     let(:rider) {FactoryGirl.create :rider}
-    before {get :edit, {:id => rider.id}, {'rider_id' => rider.id}}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :edit, {:id => rider.id}, {'user_id' => admin.id}}
 
     it {should render_template :edit}
   end
 
   context 'PUT update' do
     let(:rider) {FactoryGirl.create :rider}
+    let(:admin) {FactoryGirl.create(:admin)}
 
     context 'with authorized session' do
       context 'with valid parameters' do 
         let(:valid_attributes) {{:balance => 95.00}}
         let(:valid_parameters) {{:id => rider.id, :rider => valid_attributes}}
-        before {put :update, valid_parameters, 'rider_id' => rider.id}
+        before {put :update, valid_parameters, {'user_id' => admin.id}}
 
         it 'updates the rider attributes' do
           Rider.find(rider.id).balance.should eq valid_attributes[:balance]
@@ -91,8 +98,9 @@ describe RidersController do
       context 'with invalid parameters' do
         let(:invalid_attributes) {{:balance => nil}}
         let(:invalid_parameters) {{:id => rider.id, :rider => invalid_attributes}}
-        before {put :update, invalid_parameters, 'rider_id' => rider.id}
+        let(:admin) {FactoryGirl.create(:admin)}
 
+        before {put :update, invalid_parameters, {'user_id' => admin.id}}
         it {should render_template :edit}
         it {should set_the_flash[:alert].to("There were errors updating your rider profile.").now}
       end
@@ -104,12 +112,14 @@ describe RidersController do
 
     context 'with authorized session' do
       it 'destroys a rider' do
-        rider = FactoryGirl.create :rider
-        expect {delete :destroy, {:id => rider.id}, {:rider_id => rider.id}}.to change(Rider, :count).by(-1)
+        user = FactoryGirl.create(:user_as_rider)
+        rider = user.rider.create(:rider)
+        expect {delete :destroy, {:id => rider.id}, {'user_id' => user.id}}.to change(Rider, :count).by(-1)
       end
 
       let(:rider) {FactoryGirl.create(:rider)}
-      before {delete :destroy, {:id => rider.id}, {'rider_id' => rider.id}}
+      let(:user) {FactoryGirl.create(:user_as_rider)}
+      before {delete :destroy, {:id => rider.id}, {'user_id' => user.id}}
       it {should redirect_to root_path}
     end
 

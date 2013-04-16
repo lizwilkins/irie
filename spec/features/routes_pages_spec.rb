@@ -12,6 +12,7 @@ feature 'Routes' do
   end
 
   scenario 'creating a new route with invalid input' do
+    user = FactoryGirl.create(:admin)
     visit routes_path
     click_link 'Create route'
     click_button 'Submit'
@@ -31,6 +32,7 @@ feature 'Routes' do
   end
 
   scenario 'updating a route with invalid input' do
+    adming = FactoryGirl.create(:admin)
     FactoryGirl.create(:route)
     visit routes_path
     click_link 'Edit'

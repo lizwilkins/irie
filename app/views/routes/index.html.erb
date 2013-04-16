@@ -1,5 +1,9 @@
 <% provide :title, "Routes" %>
 
+<% if can? :create, Route %>
+  <%= link_to "Create route", new_route_path, :class => 'btn btn-success pull-right' %>
+<% end %>
+
 <table class="table">
   <tr>
     <td><b>Route Number</b></td>
@@ -15,16 +19,12 @@
       <td><%= route.path %></td>      
 
       <% if can? :update, route %>
-        <td><%= link_to "Edit", edit_route_path(route) %></td>
+        <td><%= link_to "Edit", edit_route_path(route), :class => 'btn btn-mini btn-info'  %></td>
       <% end %>
       <% if can? :destroy, route %>
-        <td><%= link_to "Delete", route, :method => :delete, :confirm => "Are you sure you want to delete route #{route.number}?" %></td>
+        <td><%= link_to "Delete", route, :method => :delete, :class => 'btn btn-mini btn-warning', :confirm => "Are you sure you want to delete route #{route.number}?" %></td>
       <% end %>
     </tr>
   <% end %>
 
 </table>
-
-<% if can? :create, Route %>
-  <p><%= link_to "Create route", new_route_path, :class => 'btn btn-primary' %></p>
-<% end %>

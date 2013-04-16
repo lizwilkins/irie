@@ -18,8 +18,8 @@ feature 'Sign up' do
 end
 
 feature 'invalid sign up' do 
-  scenario "won't sign up a user with out the email address" do
-    user = User.new
+  let(:user) {FactoryGirl.build(:user)}
+  scenario "won't sign up a user without the email address" do
     visit root_path
     click_link "Sign Up"
     fill_in "user_username", :with => user.username

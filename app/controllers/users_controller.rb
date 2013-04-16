@@ -46,12 +46,14 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.try(:destroy)
+    p current_user
     if current_user.role != 'admin'
       session[:user_id] = nil
     end
     flash[:notice] = "The user was successfully deleted."
     redirect_to users_path
-
+#     p current_user
+# p @user
 #     if @user.destroy
 #       session[:user_id] = nil  #not for admin???
 #       flash[:notice] = "The user was successfully deleted."

@@ -12,27 +12,31 @@ describe DriversController do
   end
 
   context 'GET new' do
-    before {get :new}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :new, {}, {:user_id => admin.id}}
     it {should render_template :new}
   end
 
   context 'GET index' do
-    before {get :index}
+    let(:admin) {FactoryGirl.create(:admin)}
+    before {get :index, {}, {:user_id => admin.id}}
     it {should render_template :index}
 
     it "assigns all drivers as @drivers" do
       driver = FactoryGirl.create(:driver)
-      get :index
+      admin = FactoryGirl.create(:admin)
+      get :index, {}, {:user_id => admin.id}
       assigns(:drivers).should eq([driver])
     end
   end
 
   context 'POST create' do
     context 'with valid params' do
+      let(:admin) {FactoryGirl.create(:admin)}
       let(:valid_attrs) {{:supervisor => "Max", :user_id => 1}}
       let(:valid_params) {{:driver => valid_attrs}}
       it 'creates a new driver' do
-        expect {post :create, valid_params}.to change(Driver, :count).by(1)
+        expect {post :create, valid_params, {:user_id => admin.id}}.to change(Driver, :count).by(1)
       end
     end
   end
@@ -59,7 +63,9 @@ describe DriversController do
       context 'with valid parameters' do 
         let(:valid_attrs) {{:supervisor => "Max", :user_id => 1}}
         let(:valid_params) {{:id => driver.id, :driver => valid_attrs}}
-        before {put :update, valid_params, 'driver_id' => driver.id}
+        let(:admin) {FactoryGirl.create(:admin)}
+
+        before {put :update, valid_params, {'user_id' => admin.id}}
 
         it 'updates the driver attributes' do
           Driver.find(driver.id).supervisor.should eq valid_attrs[:supervisor]
@@ -72,7 +78,9 @@ describe DriversController do
       context 'with invalid parameters' do
         let(:invalid_attrs) {{:supervisor => "", :user_id => 1}}
         let(:invalid_params) {{:id => driver.id, :driver => invalid_attrs}}
-        before {put :update, invalid_params, 'driver_id' => driver.id}
+        let(:admin) {FactoryGirl.create(:admin)}
+        
+        before {put :update, invalid_params, {'user_id' => admin.id}}
 
         it {should render_template :edit}
         it {should set_the_flash[:alert].to("There were errors updating the driver profile.").now}

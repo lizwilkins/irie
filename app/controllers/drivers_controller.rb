@@ -1,5 +1,4 @@
 class DriversController < ApplicationController
-  before_filter :admin_required, :only => [:destroy, :edit]
 
   load_and_authorize_resource
 

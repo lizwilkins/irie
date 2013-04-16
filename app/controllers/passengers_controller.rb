@@ -1,5 +1,4 @@
 class PassengersController < ApplicationController
-  before_filter :admin_required, :only => [:index]
 
   load_and_authorize_resource
 
