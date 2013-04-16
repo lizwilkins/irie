@@ -11,7 +11,7 @@ describe PassengersController do
   context 'GET index' do
     let(:passenger) {FactoryGirl.create(:passenger)}
     let(:admin) {FactoryGirl.create(:admin)}
-    let(:user) {FactoryGirl.create(:user)}
+    let(:user) {FactoryGirl.create(:user_as_rider)}
 
     context 'with authorized session' do
       before {get :index, {'trip_id' => passenger.trip.id}, {'user_id' => admin.id}}
@@ -26,15 +26,17 @@ describe PassengersController do
 
   context 'GET new' do
     let(:trip) {FactoryGirl.create(:trip)}
-    before {get :new, {'trip_id' => passenger.trip.id}}
+    let(:user) {FactoryGirl.create(:user_as_rider)}
+    before {get :new, {:trip_id => trip.id}, {'user_id' => user.id}}
 
     it {should render_template :new}
   end
 
   context 'POST create' do 
+    let(:trip) {FactoryGirl.create(:trip)}
     context 'with valid parameters' do
-      let(:valid_attributes) {{:trip_id => 1, :rider_id => 1}}
-      let(:valid_parameters) {{:passenger => valid_attributes}}
+      let(:valid_attributes) {{:rider_id => 1}}
+      let(:valid_parameters) {{:passenger => valid_attributes, :trip_id => trip.id}}
 
       it 'creates a new passenger' do
         expect {post :create, valid_parameters}.to change(Passenger, :count).by(1) 
@@ -42,14 +44,14 @@ describe PassengersController do
 
       context 'before create' do 
         before {post :create, valid_parameters}
-        it {should redirect_to passengers_path}
+        it {should redirect_to trip_passengers_path(trip.id)}
         it {should set_the_flash[:notice]}
       end
     end
 
     context 'with invalid parameters' do
-      let(:invalid_attributes) {{:rider_id => 1}}
-      let(:invalid_parameters) {{:passenger => invalid_attributes}}
+      let(:invalid_attributes) {{:rider_id => ""}}
+      let(:invalid_parameters) {{:passenger => invalid_attributes, :trip_id => trip.id}}
  
       before {post :create, invalid_parameters}
       it {should set_the_flash[:alert].to("There were errors adding this passenger.").now}
@@ -58,16 +60,20 @@ describe PassengersController do
   end
 
   context 'DELETE destroy' do 
-
+    let(:trip) {FactoryGirl.create(:trip_with_passengers)}
+    
     context 'with authorized session' do
+
       it 'destroys a passenger' do
-        passenger = FactoryGirl.create(:passenger)
-        expect {delete :destroy, {:id => passenger.id}, {:passenger_id => passenger.id}}.to change(Passenger, :count).by(-1)
+        passenger = trip.passengers.first
+        expect {delete :destroy, {:trip_id => trip.id, :id => passenger.id}}.to change(Passenger, :count).by(-1)
       end
 
-      let(:passenger) {FactoryGirl.create(:passenger)}
-      before {delete :destroy, {:id => passenger.id}, {'passenger_id' => passenger.id}, {'trip_id' => passenger.trip.id}}
-      it {should redirect_to passengers_path}
+      it 'redirects to passengers list for that trip' do
+        passenger = trip.passengers.first
+        delete :destroy, {:trip_id => trip.id, :id => passenger.id}
+        should redirect_to trip_passengers_path(trip.id)
+      end
     end
   end  
 end
