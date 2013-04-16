@@ -13,7 +13,7 @@
   </tr>
   <% @routes.each do |route| %>
     <tr>
-      <td><%= route.number %></td>
+      <td><%= link_to route.number, route %></td>
       <td><%= route.origin %></td>
       <td><%= route.destination %></td>
       <td><%= route.path %></td>      

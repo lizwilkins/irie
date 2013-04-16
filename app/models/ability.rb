@@ -22,7 +22,8 @@ class Ability
       can :index, Route  # plus :departures
       can [:create, :read, :destroy], Passenger  #, :rider_id => current_user.rider.id
       can [:crud], Rider  #, :user_id => current_user.id
-      can [:create, :read, :update, :destroy], User, :user => @current_user
+      can [:read, :update, :destroy], User, :user => @current_user
+      can [:create], User 
     end 
   end
 end
