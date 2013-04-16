@@ -26,7 +26,8 @@ describe PassengersController do
 
   context 'GET new' do
     let(:trip) {FactoryGirl.create(:trip)}
-    before {get :new, {'trip_id' => passenger.trip.id}}
+    admin = FactoryGirl.create(:admin) 
+    before {get :new, {'trip_id' => passenger.trip.id, :user_id => admin.id}}
 
     it {should render_template :new}
   end
@@ -62,7 +63,8 @@ describe PassengersController do
     context 'with authorized session' do
       it 'destroys a passenger' do
         passenger = FactoryGirl.create(:passenger)
-        expect {delete :destroy, {:id => passenger.id}, {:passenger_id => passenger.id}}.to change(Passenger, :count).by(-1)
+        admin = FactoryGirl.create(:admin) 
+        expect {delete :destroy, {:id => passenger.id}, {:user_id => admin.id}}.to change(Passenger, :count).by(-1)
       end
 
       let(:passenger) {FactoryGirl.create(:passenger)}

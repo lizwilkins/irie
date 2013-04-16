@@ -87,7 +87,8 @@ describe RoutesController do
     context 'with authorized session' do
       it 'destroys the route' do
         route = FactoryGirl.create(:route)
-        expect {delete :destroy, {:id => route.id}}.to change(Route, :count).by(-1)
+        admin = FactoryGirl.create(:admin) :user_id => admin.id
+        expect {delete :destroy, {:id => route.id}, :user_id => admin.id}.to change(Route, :count).by(-1)
       end   
 
       context 'response' do
