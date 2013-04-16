@@ -3,7 +3,7 @@
 <% if can? :create, Route %>
   <%= link_to "Create route", new_route_path, :class => 'btn btn-success pull-right' %>
 <% end %>
-
+<%= will_paginate @routes %>
 <table class="table">
   <tr>
     <td><b>Route Number</b></td>
