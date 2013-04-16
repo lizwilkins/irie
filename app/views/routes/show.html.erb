@@ -1,1 +1,4 @@
-<% provide :title, "Route ##{@route.number}" %>
+<% provide :title, "Route ##{@route.number}" %>    
+
+<%= render :partial => 'trips/list', :locals => {:trips => @route.trips} %>
+

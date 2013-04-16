@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 feature 'Trips' do 
-  let(:user) {FactoryGirl.create(:admin)}
   scenario 'trips by route #' do
+    admin_login_helper
+    FactoryGirl.create(:trip)
     visit trips_path
-    click_link 'Add Me'
-    fill_in 'x', :with => ''
-
+    # click_button 'Add Me'
 
   end
 end

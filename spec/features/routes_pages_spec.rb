@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature 'Routes' do
   scenario 'Create a new route' do
+    admin_login_helper
     visit routes_path
     click_link 'Create route'
     fill_in 'Number', :with => '11A'
@@ -12,7 +13,7 @@ feature 'Routes' do
   end
 
   scenario 'creating a new route with invalid input' do
-    user = FactoryGirl.create(:admin)
+    admin_login_helper
     visit routes_path
     click_link 'Create route'
     click_button 'Submit'
@@ -20,6 +21,7 @@ feature 'Routes' do
   end
 
   scenario 'editing an existing route' do
+    admin_login_helper
     FactoryGirl.create(:route)
     visit routes_path
     click_link 'Edit'
@@ -32,7 +34,7 @@ feature 'Routes' do
   end
 
   scenario 'updating a route with invalid input' do
-    adming = FactoryGirl.create(:admin)
+    admin_login_helper
     FactoryGirl.create(:route)
     visit routes_path
     click_link 'Edit'
@@ -42,6 +44,7 @@ feature 'Routes' do
   end
 
   scenario 'deleting a route' do
+    admin_login_helper
     route = FactoryGirl.create(:route)
     visit routes_path
     click_link 'Delete'
@@ -49,5 +52,24 @@ feature 'Routes' do
   end
 
   scenario 'viewing trips for a route' do
+    admin_login_helper
+    route_creation_helper
+    click_link 'Log Out'
+    visit routes_path
+    click_link '6B'
+
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+

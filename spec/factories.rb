@@ -41,14 +41,14 @@ FactoryGirl.define do
   end    
 
   factory :driver do
-    sequence(:user_id) {|n| n}
+    user
     sequence(:supervisor) {|n| "super#{n}"}
   end    
 
   factory :trip do
-    sequence(:route_id) {|n| n}
-    sequence(:driver_id) {|n| n}
-    sequence(:bus_id) {|n| n}
+    route
+    driver
+    bus
     departure Date.today
     factory :trip_with_passengers do
       after(:create) {|trip| FactoryGirl.create(:passenger, :trip => trip)}

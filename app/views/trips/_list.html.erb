@@ -7,7 +7,7 @@
     <td><b>Driver</b></td>
     <td><b>Bus Number</b></td>  
   </tr>
-  <% @trips.each do |trip| %>
+  <% trips.each do |trip| %>
     <tr>
       <td><%= trip.route.number %></td>
       <td><%= trip.route.origin %></td>
