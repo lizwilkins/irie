@@ -6,7 +6,7 @@
 
 <table class="table">
   <tr>
-    <td><b><%= link_to "Trip Assignment" %></b></td>
+    <td><b><%= "Trip Assignment" %></b></td>
     <td><b>First Name</b></td>
     <td><b>Last Name</b></td>
     <td><b>Phone</b></td>
@@ -14,9 +14,10 @@
   </tr>
   <% @drivers.each do |driver| %>
     <tr>
-      <td><%= "driver.user.first_name" %></td>
-      <td><%= "driver.user.last_name" %></td>
-      <td><%= "driver.user.phone" %></td>
+      <td><%= link_to %></td>
+      <td><%= "#{driver.user.first_name}" %></td>
+      <td><%= "#{driver.user.last_name}" %></td>
+      <td><%= "#{driver.user.phone}" %></td>
       <td><%= driver.supervisor %></td>
 
       <% if can? :update, driver %>

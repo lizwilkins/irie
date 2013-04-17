@@ -5,12 +5,14 @@
 <% end %>
 <%= will_paginate @routes %>
 <table class="table">
-  <tr>
-    <td><b>Route Number</b></td>
-    <td><b>Origin</b></td>
-    <td><b>Destination</b></td>
-    <td><b>Path</b></td>    
-  </tr>
+  <thead>
+    <tr>
+      <th>Route Number</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Path</th>    
+    </tr>
+  </thead>
   <% @routes.each do |route| %>
     <tr>
       <td><%= link_to route.number, route %></td>
