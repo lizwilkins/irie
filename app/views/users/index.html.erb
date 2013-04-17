@@ -8,14 +8,17 @@
   <tr>
     <td><b>UserName</b></td>
     <td><b>Email</b></td>
-    <td></td>
-    <td></td>
+    <td>Last Name</td>
+    <td>First Name</td>
+    <td>Phone</td>
   </tr>
   <% @users.each do |user| %>
     <tr>
       <td><%= user.username %></td>
       <td><%= user.email %></td>
-
+      <td><%= user.last_name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.phone %></td>
       <% if can? :update, @user %>
         <td><%= link_to "Edit", edit_user_path(user), :class => 'btn btn-mini btn-info'  %></td>
       <% end %>

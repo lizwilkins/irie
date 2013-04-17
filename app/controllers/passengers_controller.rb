@@ -10,8 +10,9 @@ class PassengersController < ApplicationController
   def create
     @trip = Trip.find(params[:trip_id])
     @passenger = @trip.passengers.build(params[:passenger])
+    @passenger.rider = current_user.rider
     if @passenger.save
-      redirect_to trip_passengers_path(@trip), notice: 'Passenger "params[:passenger][:rider_id]" has been added to the passenger list.'
+      redirect_to route_path(@route), notice: "Passenger has been added to the passenger list."
     else
       flash.now[:alert] = "There were errors adding this passenger."
       render :new

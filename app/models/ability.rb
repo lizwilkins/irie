@@ -28,11 +28,11 @@ class Ability
       can [:show, :update, :destroy], User, :user => @current_user
 
       can [:read], Route
-
+      can [:read], Trip
       can [:create], Passenger
       can [:show, :destroy], Passenger  #, :rider_id => current_user.rider.id
 
-      # can [:create, :show, :update, :destroy], Rider, :user_id => @current_user.id
+      can [:create, :show, :update, :destroy], Rider #, :user_id => @current_user.id
     end 
   end
 end

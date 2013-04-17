@@ -30,6 +30,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'launchy'
 end
 
 group :development do

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   rescue_from CanCan::AccessDenied do |exception|
+    # Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     flash[:error] = "Access denied."
     redirect_to root_path
   end

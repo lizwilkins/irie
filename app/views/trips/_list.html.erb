@@ -14,7 +14,7 @@
       <td><%= trip.departure.localtime.strftime("%x %H:%M") %></td>
       <td><%= trip.bus.license_number %></td>
       <% if current_user %>
-        <td><%= link_to 'Add Me', new_trip_passenger_path(trip), :class => 'btn btn-mini btn-success' %></td>
+        <td><%= button_to 'Add Me', trip_passengers_path(trip), :method => :post, :class => 'btn btn-mini btn-success' %></td>
        <% end %>
       <% if can? :update, trip %>
         <td><%= link_to 'Edit', edit_trip_path(trip), :class => 'btn btn-mini btn-info' %></td>
