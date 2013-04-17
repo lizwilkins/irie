@@ -10,14 +10,12 @@
 <% end %>
 
 <%= form_for @passenger do |f| %>
-  <div class="field">
-    <%= f.label :trip_id %><br />
+
+    <%= f.label :trip_id %>
     <%= f.text_field :trip_id %>
-  </div>
-  <div class="field">
-    <%= f.label :rider_id %><br />
+
+    <%= f.label :rider_id %>
     <%= f.text_field :rider_id %>
-  </div>
 
   <div class="actions"><%= f.submit 'Submit', :class => 'btn btn-primary' %></div>
 <% end %>

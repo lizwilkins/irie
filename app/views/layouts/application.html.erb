@@ -21,8 +21,8 @@
           <div class="pull-right">
             <% if current_user %>
               Logged in as <b><%= current_user.username %></b>.
-              <%= link_to "Log Out", logout_path, method: "delete", :class => 'btn btn-primary' %>
-              <%= link_to "Edit Account", edit_user_path(current_user), method: "get", :class => 'btn btn-primary' %>
+              <%= link_to "Log Out", logout_path, method: "delete", :class => 'btn btn-primary btn-mini' %>
+              <%= link_to "Account", edit_user_path(current_user), method: "get", :class => 'btn btn-primary btn-mini' %>
             <% else %>
               <%= link_to "Sign Up", signup_path, :class => 'btn btn-primary' %> or
               <%= link_to "Log In", login_path, :class => 'btn btn-primary' %>

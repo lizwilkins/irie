@@ -3,8 +3,18 @@ class PassengersController < ApplicationController
   load_and_authorize_resource
 
   def new
-    trip = Trip.find(params[:trip_id])
-    @passenger = trip.passengers.new(:rider_id => current_user.rider.id)
+    if current_user.is_admin?
+      render :new
+    elsif current_user.rider
+      trip = Trip.find(params[:trip_id])
+      rider = current_user.rider
+      passenger = trip.passengers.create(:rider_id => rider.id)
+      flash[:notice] = 'You have been added to this trip.'
+      redirect_to :back
+    else
+      @rider = current_user.build_rider
+      render 'riders/new'
+    end
   end
   
   def create
