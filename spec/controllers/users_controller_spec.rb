@@ -19,7 +19,7 @@ describe UsersController do
     end
 
     context 'without authorized session' do
-      before {get :index, {}, {}}
+      before {get :index, {}, {'user_id' => admin.id}}
       it {should render_template :index}
     end
   end
